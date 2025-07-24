@@ -1,0 +1,206 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia"
+results:
+# Energy Demand
+  # Mapping electricity demand for end users based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^ELC002$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+# Mapping electricity demand for TRANSMISSION based on fuel usage across different time slices.
+  - iamc_variable: 'Secondary Energy|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^ELC001$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+ # Mapping electricity demand for Residential based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Residential|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMRESEL002$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+     # Mapping electricity demand for Industry based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Industry|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMINDEL002$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping electricity demand for end users based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Commercial|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMCOMEL002$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping agricultural diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Agriculture'
+    osemosys_param: 'Demand'
+    demand: ['^AGRDSL$']
+    technology: ['.*']
+    unit: EJ/yr
+    transform: abs
+  # Mapping biomass demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Biomass'
+    osemosys_param: 'Demand'
+    demand: ['^BIO$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Commercial|Liquids|Oil'
+    osemosys_param: 'Demand'
+    demand: ['^DSL$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+# Mapping diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Other Sector|Heat|Geothermal'
+    osemosys_param: 'Demand'
+    demand: ['^GEO$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping fuel oil demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Fuel Oil'
+    osemosys_param: 'Demand'
+    demand: ['^LFO$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping refined fuel oil demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Fuel Oil|Refined'
+    osemosys_param: 'Demand'
+    demand: ['^LFOR$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+
+  # Mapping transport biofuel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Transportation|Liquids'
+    osemosys_param: 'Demand'
+    demand: ['^TRABIO$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+  # Mapping transport ENERGY demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Transportation'
+    osemosys_param: 'Demand'
+    demand: ['^DEMTRA$']
+    technology: ['.*']
+    unit: PJ/yr
+    transform: abs
+
+# Land Demand
+
+  # Mapping bean crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Feed|Other Crops'
+    osemosys_param: 'Demand'
+    demand: ['^CRPBEA$']
+    technology: ['.*']
+    unit: million t DM/yr
+    transform: abs
+  # Mapping sugar cane crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Food|Sugar Crops'
+    osemosys_param: 'Demand'
+    demand: ['^CRPSGC$']
+    technology: ['.*']
+    unit:  million t DM/yr
+    transform: abs
+ # Mapping wheat crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Feed|Cereals'
+    osemosys_param: 'Demand'
+    demand: ['^CRPWHE$','^CRPMAI$','^CRPSOR$','^CRPBRL$','^CRPOTC$','^CRPCER$']
+    technology: ['.*']
+    unit: million t DM/yr
+    transform: abs 
+# Mapping wheat crop demand for land use across different time slices.
+#  - iamc_variable: 'Agricultural Demand|Crops|Feed|Cereals'
+#    osemosys_param: 'Demand'
+#    demand: ['^CRPWHE$','^CRPMAI$','^CRPSOR$','^CRPBRL$','^CRPOTC$','^CRPCER$','^CRPOTC$','^CRPOTC$']
+#    technology: ['.*']
+#    unit: million t DM/yr
+#    transform: abs
+
+ # Mapping  demand for land use across built up environment across different time slices.
+#  - iamc_variable: 'Land Cover|Built-Up Area'
+#    osemosys_param: 'Demand'
+#    demand: ['^LBLT$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+  # Mapping total land demand for land use across different time slices.
+#  - iamc_variable: 'Land Cover'
+#    osemosys_param: 'Demand'
+#    demand: ['^LND$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+  # Mapping other land demand for land use across different time slices.
+#  - iamc_variable: 'Land Cover|Other Land'
+#    osemosys_param: 'Demand'
+#    demand: ['^LOTH$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+
+# Water Demand
+  # Mapping agricultural water demand for water use across different time slices.
+  - iamc_variable: 'Water Withdrawal|Irrigation'
+    osemosys_param: 'Demand'
+    demand: ['^AGRWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping land water demand for water use across different time slices.
+  - iamc_variable: 'Land Use|Water'
+    osemosys_param: 'Demand'
+    demand: ['^LWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+ # Mapping public water demand for domestic use based on fuel usage across different time slices.
+  - iamc_variable: 'Water Withdrawal|Municipal Water'
+    osemosys_param: 'Demand'
+    demand: ['^PUBWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping power water demand for water use across different time slices.
+  - iamc_variable: 'Water Withdrawal|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^PWRWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping water groundwater demand for water use across different time slices.
+# Note not in Common template
+  - iamc_variable: 'Water Withdrawal|Municipal Water|Groundwate'
+    osemosys_param: 'Demand'
+    demand: ['^WTRGWT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping water processing demand for water use across different time slices. 
+# Note not in Common template
+  - iamc_variable: 'Water Flows|Precipitation'
+    osemosys_param: 'Demand'
+    demand: ['^WTRPRC$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping water surface demand for water use across different time slices.
+# Note not in Common template
+  - iamc_variable: 'Water Withdrawal|Municipal Water|Surface'
+    osemosys_param: 'Demand'
+    demand: ['^WTRSUR$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+
+ 

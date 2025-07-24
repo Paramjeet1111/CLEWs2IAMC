@@ -1,0 +1,109 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia"
+results:
+# Energy Section
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Gas'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRGAS$']
+    unit: USD/GWh/year
+  # Mapping capital investment for transport power technology across different years.  
+  - iamc_variable: 'Investment|Energy Supply|Electricity'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRTRN$']
+    unit: USD/GWh/year
+
+  # Mapping capital investment for wind power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Wind'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRWND$']
+    unit: USD/GWh/year
+
+  # Mapping capital investment for solar power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Solar'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRSOL$' ]
+    unit: USD/GWh/year
+# Mapping capital investment for solar power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Solar|PV'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRPVR$' ]
+    unit: USD/GWh/year
+# Mapping capital investment for Hydro Power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Hydro'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRHYD001$','^PWRHYD002$','^PWRHYD004$',]
+    unit: USD/GWh/year
+# Mapping capital investment for Geothermal Power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Geothermal'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRGEO$']
+    unit: USD/GWh/year
+  # Mapping capital investment for Diesel power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Oil'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRDSL$']
+    unit: USD/GWh/year
+ # Mapping capital investment for coal imports for power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Coal'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^IMPCOA$']
+    unit: USD/GWh/year
+ # Mapping capital investment for diesel imports for power technology across different years.
+ #  - iamc_variable: 'Investment|Energy Supply|Electricity|Oil'
+ #    osemosys_param: 'CapitalInvestment'
+ #    capacity: ['^IMPDSL$']
+ #    unit: USD/GWh/year
+
+
+  # Land Demand
+  # Mapping capital investment for Agriculturee technology across different years.
+  - iamc_variable: 'Investment|Agriculture'
+    osemosys_param: 'CapitalInvestment'
+    capacity: 
+      - '^RSCLND$'
+      - '^LNDRICRNF$'
+      - '^LNDRICIRR$'
+      - '^LNDCERHR$'
+      - '^LNDCERLR$'
+      - '^LNDCERHI$'
+      - '^LNDCERLI$'
+      - '^LNDMAIHR$'
+      - '^LNDMAILR$'
+      - '^LNDMAIHI$'
+      - '^LNDMAILI$'
+      - '^LNDWHEHR$'
+      - '^LNDWHELR$'
+      - '^LNDWHEHI$'
+      - '^LNDWHELI$'
+      - '^LNDSORHR$'
+      - '^LNDSORLR$'
+      - '^LNDSORHI$'
+      - '^LNDSORLI$'
+      - '^LNDBRLHR$'
+      - '^LNDBRLLR$'
+      - '^LNDBRLHI$'
+      - '^LNDBRLLI$'
+      - '^LNDBRLLI$'
+      - '^LNDCOFHR$'
+      - '^LNDCOFLR$'
+      - '^LNDCOFHI$'
+      - '^LNDCOFLI$'
+      - '^LNDOTCHR$'
+      - '^LNDOTCLR$'
+      - '^LNDOTCHI$'
+      - '^LNDOTCLI$'
+      - '^LNDSGCHI$'
+      - '^LNDOTCLI$'
+    unit: USD/GWh/year
+# Mapping capital investment for forest management land technology across different years.               
+  - iamc_variable: 'Investment|Energy Supply|Solids|Biomass'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^LNDFOR$']
+    unit: USD/GWh/year
+  
+  # Mapping capital investment for livestock land technology across different years.               #NOT IN Common File
+  - iamc_variable: 'Investment|Built-Up Area'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^LNDBLT$']
+    unit: USD/GWh/year

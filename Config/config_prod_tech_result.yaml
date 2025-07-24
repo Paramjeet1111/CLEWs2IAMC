@@ -1,0 +1,339 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia" #iso2_x, iso3_x, from_csv, or a name of a country/region [substitute x with start, end, or a positive number]
+results:
+# Energy sector mappings
+# Mapping coal production rates from mining technologies and fuels.
+- iamc_variable: 'Primary Energy|Coal'
+  technology: ['MINCOA.*']
+  fuel: ['COA.*']
+  unit: EJ/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping Elecricity from biomass from production technologies and fuels.
+- iamc_variable: 'Secondary Energy|Electricity|Biomass'
+  technology: ['PWRBIO001.*']
+  fuel: ['ELC001.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping coal-based electricity production from power generation technologies.
+- iamc_variable: 'Primary Energy|Coal|Electricity'
+  technology: ['PWRCOA.*']
+  fuel: ['ELC001.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping gas-based electricity production from power generation technologies.
+- iamc_variable: 'Secondary Energy|Electricity|Gas'
+  technology: ['PWRGAS.*']
+  fuel: ['ELC001.*']
+  unit: GW
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping hydro-based electricity production from power generation technologies.
+- iamc_variable: 'Secondary Energy|Electricity|Hydro'
+  technology: ['PWRHYD.*','PWRHYD001.*','PWRHYD002.*','PWRHYD004.*',]
+  fuel: ['ELC001.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping transmission electricity production from power technologies.
+- iamc_variable: 'Final Energy|Electricity'
+  technology: ['PWRTRN+.*']
+  fuel: ['ELC002+.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping transmission electricity production from power technologies.
+- iamc_variable: 'Final Energy|Residential and Commercial|Electricity'
+  technology: ['PWRBACKSTOP+.*']
+  fuel: ['ELC002+.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping wind-based electricity production from power technologies.
+- iamc_variable: 'Secondary Energy|Electricity|Wind'
+  technology: ['PWRWND.*']
+  fuel: ['ELC001.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping transmission electricity production from PV Utility power plant power technologies.
+- iamc_variable: 'Secondary Energy|Electricity|Solar|PV'
+  technology: ['PWRSOL+.*','PWRPVR+.*']
+  fuel: ['ELC002+.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping transmission electricity production from Off-grid roof top PV and storage power technologies.
+- iamc_variable: 'Secondary Energy|Electricity|Solar|PV|Residential'
+  technology: ['PWRPVU+.*']
+  fuel: ['ELC002+.*']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping  agriculture diesel Pproduction for agricultural diesel
+- iamc_variable: 'Secondary Energy|Liquids|Oil'
+  technology: ['^DEMAGRDSL$']
+  fuel: ['^AGRDSL$']
+  unit: EJ/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping  electricity  Production from diesel
+- iamc_variable: 'Secondary Energy|Electricity|Fossil'
+  technology: ['^PWRDSL$']
+  fuel: ['^ELC001$']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping Biofuel production for biofuel transport to transport water withdrawal.
+- iamc_variable: 'Secondary Energy|Liquids'
+  technology: ['^DEMTRABIO$']
+  fuel: ['^TRABIO$']
+  unit: EJ/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping geothermal energy for electricity production.
+- iamc_variable: 'Secondary Energy|Liquids'
+  technology: ['^PWRGEO$']
+  fuel: ['^ELC001$']
+  unit: GW
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+  
+  
+
+# Land sector mappings
+# Mapping production of Total land area.
+- iamc_variable: 'Land Cover'
+  technology: ['^RSCLND$']
+  fuel: ['^LND$']
+  unit: million ha
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping production of built land area.
+- iamc_variable: 'Land Cover|Built-up Area'
+  technology: ['^LNDBLT$']
+  fuel: ['^LBLT$']
+  unit: million ha
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+#New Vairiable Name
+# Mapping production of forest land area.
+- iamc_variable: 'Water Flow | Evapotranspiration'
+  technology:
+      - '^LNDOTH$'
+      - '^LNDWAT$'
+      - '^LNDFOR$'
+      - '^LNDBLT$'
+      - '^LNDBRLHR$'
+      - '^LNDBRLLR$'
+      - '^LNDBRLHI$'
+      - '^LNDBRLLI$'
+      - '^LNDWHEHR$'
+      - '^LNDWHELR$'
+      - '^LNDWHEHI$'
+      - '^LNDWHELI$'
+      - '^LNDMAIHR$'
+      - '^LNDMAILR$'
+      - '^LNDMAIHI$'
+      - '^LNDMAILI$'
+      - '^LNDSORHR$'
+      - '^LNDSORLR$'
+      - '^LNDSORHI$'
+      - '^LNDSORLI$'
+      - '^LNDCERHR$'
+      - '^LNDCERLR$'
+      - '^LNDCERHI$'
+      - '^LNDCERLI$'
+      - '^LNDCOFHR$'
+      - '^LNDCOFLR$'
+      - '^LNDCOFHI$'
+      - '^LNDCOFLI$'
+      - '^LNDOTCHR$'
+      - '^LNDOTCLR$'
+      - '^LNDOTCHI$'
+      - '^LNDOTCLI$'
+  fuel: ['^WTREVT$']
+  unit: Kton/1000 sq KM
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of irrigated and rainfed CROPS WITH LOW TO HIGH.
+- iamc_variable: 'Agricultural Production|Crops'
+  technology: ['^LNDMAIIRR$','^LNDMAIRNF$','^LNDBRLHR$','^LNDBRLLR$','^LNDBRLHI$','^LNDBRLLI$','^LNDMAIHR$','^LNDMAILR$','^LNDMAIHI$','^LNDMAILI$','^LNDWHEHR$','^LNDWHELR$','^LNDWHEHI$','^LNDWHELI$','^LNDSORHR$','^LNDSORLR$','^LNDSORHI$','^LNDSORLI$','^LNDOTCHR$','^LNDOTCLR$','^LNDOTCHI$','^LNDOTCLI$','^LNDCOFHR$','^LNDCOFLR$','^LNDCOFHI$','^LNDCOFLI$', '^LNDCERHR$','^LNDCERLR$','^LNDCERHI$','^LNDCERLI$']
+  fuel: ['^CRPMAI$','^CRPBRL$','^CRPWHE$','^CRPSOR$','^CRPOTC$','^CRPCOF$','^CRPCER$']
+  unit: million t DM/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of rainfed maize land area.
+#- iamc_variable: 'Land Cover|Crop|Maize|Rainfed'
+#  technology: ['^LNDMAIRNF$']
+#  fuel: ['^CRPMAI$']
+#  unit: Mha/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of irrigated and rainfed rice land area.
+- iamc_variable: 'Agricultural Production|Crops|Cereals'
+  technology: ['^LNDRICIRR$','^LNDRICRNF$']
+  fuel: ['^CRPRIC$']
+  unit:  Mton
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping import of crops.
+- iamc_variable: 'Trade|Agriculture|Crops'
+  technology: ['^IMPBRL$','^IMPCER$','^IMPMAI$','^IMPSOR$','^IMPWHE$',]
+  fuel: ['^CRPBRL$','^CRPCER$','^CRPMAI$','^CRPSOR$','^CRPWHE$',]
+  unit:  Mton
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+
+# Mapping production of rainfed rice land area.
+#- iamc_variable: 'Land Cover|Crop|Rice|Rainfed'
+#  technology: ['^LNDRICRNF$']
+#  fuel: ['^CRPRIC$']
+#  unit: Mha/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of water land area.
+- iamc_variable: 'Water Ecosystems'
+  technology: ['^LNDWAT$']
+  fuel: ['^LWAT$']
+  unit: million ha
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+
+# Water
+# Mapping precipitation production from resource precipation.
+# NEw variable not in common excel file
+- iamc_variable: 'Water Flow|precipitation'
+  technology: ['^RSCPRC$']
+  fuel: ['^WTRPRC$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping Evapotranspiration f production for irrigated rom built up land .
+# NEw variable not in common excel file
+- iamc_variable: 'Water Flow|Built-Up Area|precipitation'
+  technology: ['^LNDBLT$']
+  fuel: ['^WTREVT$']
+  unit: mm/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping groundwater and surface water production for irrigated maize to agricultural water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Irrigation'
+#  technology: ['^LNDMAIIRR$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping water withdrawal for agriculture from rainfed maize land use.
+#- iamc_variable: 'Water|Withdrawal|Agriculture'
+#  technology: ['^LNDMAIRNF$']
+# fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Maps groundwater and surface water production for rainfed maize to agricultural water withdrawal.
+
+# Mapping  groundwater and surface water production for irrigated rice to agricultural water withdrawal.
+- iamc_variable: 'Water|Withdrawal|Agriculture'
+  technology: ['^LNDRICIRR$','^LNDRICRNF$']
+  fuel: ['^WTRGWT$', '^WTRRUN$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping groundwater and surface water production for rainfed rice to agricultural water withdrawal.
+#- iamc_variable: 'Water|Withdrawal|Agriculture'
+#  technology: ['^LNDRICRNF$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+# transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping groundwater and surface water production for built land to other water withdrawal, .
+#- iamc_variable: 'Water|Withdrawal|Other'
+#  technology: ['^LNDBLT$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping groundwater and surface water production for forest land to other water withdrawal.
+- iamc_variable: 'Water|Withdrawal|Other'
+  technology: ['^LNDFOR$']
+  fuel: ['^WTRGWT$', '^WTRRUN$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+  
+
+# Mapping water withdrawal for water land use.
+#- iamc_variable: 'Water|Withdrawal|Other'
+#  technology: ['^LNDWAT$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+#Maps groundwater and surface water production for water land to other water withdrawal, as land use is not standard.
+
+
+# Mapping  groundwater production for agricultural irrigation to agricultural water withdrawal..
+- iamc_variable: 'Water Withdrawal|Irrigation'
+  technology: ['^DEMAGRGWTWAT$','^DEMAGRSURWAT$']
+  fuel: ['^AGRWAT$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping  surface water production for agricultural irrigation to agricultural water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Irrigation'
+#  technology: ['^DEMAGRSURWAT$']
+#  fuel: ['^AGRWAT$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+ 
+
+# Mapping groundwater and Surface water production for public use to domestic water withdrawal.
+- iamc_variable: 'Water Withdrawal|Municipal Water'
+  technology: ['^DEMPUBGWTWAT$','^DEMPUBSURWAT$']
+  fuel: ['^PUBWAT$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping surface water production for public surface use.
+#- iamc_variable: 'Water|Withdrawal|Domestic'
+#  technology: ['^DEMPUBSURWAT$']
+#  fuel: ['^PUBWAT$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping surface water production for power generation to energy water withdrawal.
+- iamc_variable: 'Water Withdrawal|Electricity'
+  technology: ['^DEMPWRSURWAT$']
+  fuel: ['^PWRWAT$']
+  unit: km3/yr
+  transform: abs
+  osemosys_param: 'ProductionByTechnologyByMode'
+
+
+
+  

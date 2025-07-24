@@ -1,0 +1,127 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia"
+results:
+# Energy Section
+  # Coal extraction processing and equivalent emissions
+  - iamc_variable: "Gross Emissions|CO2|Energy|Supply|Solids"
+    tech_emi: ["^MINCOA$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  #Coal Import emissions  [NOT IN DATABASE]
+  - iamc_variable: "Emissions|CO2EQ|Energy|Supply|Solids|Coal Import"
+    tech_emi: ["^IMPCOA$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Natural gas extraction and processing and CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Supply|Gases"
+    tech_emi: ["^MINGAS$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply|Gases|Gas"
+    tech_emi: ["^MINGAS$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Agricultural diesel combustion and  CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Demand|AFOFI"
+    tech_emi: ["^DEMAGRDSL$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Demand|AFOFI" 
+    tech_emi: ["^DEMAGRDSL$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Transport bioenergy combustion and CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Demand|Transportation"
+    tech_emi: ["^DEMTRABIO$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Demand|Transportation"
+    tech_emi: ["^DEMTRABIO$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Imported diesel CO2-equivalent emissions 
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply"
+    tech_emi: ["^IMPDSL$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+   #Imported petroleum CO2-equivalent emissions [NOT IN DATABASE]
+  - iamc_variable: 'Emissions|Kyoto Gases|Energy|Supply|Fugitive'
+    tech_emi: ['^IMPPET$']
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: 'AnnualTechnologyEmission'
+
+  # Land Section
+  # Maize Crop (non-flooded) N2O and (irrigated) N2O emissions
+  - iamc_variable: "Emissions|N2O|AFOLU|Land"
+    tech_emi: ["^LNDMAIRNF$", "^LNDMAIIRR$"]
+    emissions: [N2O]
+    unit: kt N2O/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Maize Crop (non-flooded) and (irrigated) CO2-equivalent emissions
+  - iamc_variable: "Emissions|Kyoto Gases|AFOLU"
+    tech_emi: ["^LNDMAIRNF$", "^LNDMAIIRR$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Rice cultivation (non-flooded) and (irrigated) CH4 emissions
+  - iamc_variable: "Emissions|CH4|AFOLU|Agriculture|Rice"
+    tech_emi: ["^LNDRICRNF$", "^LNDRICIRR$"]
+    emissions: [CH4]
+    unit: Mt CH4/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Rice cultivation (non-flooded) and (irrigated) CO2-equivalent emissions
+  - iamc_variable: "Emissions|Kyoto Gases|AFOLU|Agriculture|Rice"
+    tech_emi: ["^LNDRICRNF$", "^LNDRICIRR$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Forestry CO2 emissions or sequestration
+  - iamc_variable: "Carbon Removal|Land Use|Forest Management"
+    tech_emi: ["^LNDFOR$"]
+    emissions: ["CO2"]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+    
+    # Biomass resource CO2-equivalent emissions 
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply|Gases|Biomass"
+    tech_emi: ["^MINBIO$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"

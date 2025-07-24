@@ -1,0 +1,212 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia" # iso2_x, iso3_x, from_csv, or a name of a country/region
+results:
+  # Energy Section
+  # Mapping total capacity for coal mining technology
+  - iamc_variable: "Resource|Extraction|Coal"                                               
+    capacity: ["^MINCOA$"]
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for Biomass Power Generation technology
+  - iamc_variable: "Capacity|Electricity|Biomass|w/o CCS"                                               
+    capacity: ["^PWRBIO001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for gas mining technology
+  - iamc_variable: "Resource|Extraction|Gas"                                                
+    capacity: ["^MINGAS$"]
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for coal power technology
+  - iamc_variable: "Capacity|Electricity|Coal"
+    capacity: ["^PWRCOA001$","^PWRCOA$","^PWRCOA002$",]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for gas power technology
+  - iamc_variable: "Capacity|Electricity|Gas"
+    capacity: ["^PWRGAS$", "^PWRNGS001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for transmission power technology
+  - iamc_variable: "Capacity|Electricity"
+    capacity: ["^PWRTRN$","^PWRTRN001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+  
+  # Mapping total capacity for wind resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Wind"
+    capacity: ["^PWRWND$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for solar resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar"
+    capacity: ["^PWRSOL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+    
+  # Mapping total capacity for solar pv off grid and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar|PV|Residential"
+    capacity: ["^PWRPVR$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for solar pv Utility and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar|PV|Commercial"
+    capacity: ["^PWRPVU$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+    
+  # Mapping total capacity for hydro resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Hydro"
+    capacity: ["^PWRHYD$","^PWRHYD001$","^PWRHYD002$","^PWRHYD004$",]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for agricultural diesel demand technology
+  - iamc_variable: "Final Energy|Agriculture|Liquids|Oil"
+    capacity: ["^DEMAGRDSL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for Diesel Power Plant technology
+  - iamc_variable: "Capacity|Electricity|Oil"
+    capacity: ["^PWRDSL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual" 
+  # Mapping total capacity Geothermal power technology
+  - iamc_variable: "Capacity|Electricity|Geothermal"
+    capacity: ["^PWRGEO$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+
+
+
+  # Land Section
+  # Mapping total capacity for built-up land technology
+  - iamc_variable: "Land Cover|Built-Up Area"
+    capacity: ["^LNDBLT$"]
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for forest land technology
+  - iamc_variable: "Land Cover|Forest"
+    capacity: ["^LNDFOR$"]
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for water land technology
+  - iamc_variable: "Water Ecosystems"
+    capacity: ["^LNDWAT$"]
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for maize and rice rainfed crop technologies
+  - iamc_variable: "Land Cover|Cropland|Cereals|Rainfed"
+    capacity: ["^LNDMAIRNF$", "^LNDRICRNF$"]
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for maize and rice irrigated crop technologies
+  - iamc_variable: "Land Cover|Cropland|Cereals|Irrigated"
+    capacity: ["^LNDMAIIRR$", "^LNDRICIRR$"]
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for total land resource technology
+  - iamc_variable: "Land Cover"
+    capacity:
+      - '^LNDOTH$'
+      - '^LNDWAT$'
+      - '^LNDFOR$'
+      - '^LNDBLT$'
+      - '^LNDBRLHR$'
+      - '^LNDBRLLR$'
+      - '^LNDBRLHI$'
+      - '^LNDBRLLI$'
+      - '^LNDWHEHR$'
+      - '^LNDWHELR$'
+      - '^LNDWHEHI$'
+      - '^LNDWHELI$'
+      - '^LNDMAIHR$'
+      - '^LNDMAILR$'
+      - '^LNDMAIHI$'
+      - '^LNDMAILI$'
+      - '^LNDSORHR$'
+      - '^LNDSORLR$'
+      - '^LNDSORHI$'
+      - '^LNDSORLI$'
+      - '^LNDCERHR$'
+      - '^LNDCERLR$'
+      - '^LNDCERHI$'
+      - '^LNDCERLI$'
+      - '^LNDCOFHR$'
+      - '^LNDCOFLR$'
+      - '^LNDCOFHI$'
+      - '^LNDCOFLI$'
+      - '^LNDOTCHR$'
+      - '^LNDOTCLR$'
+      - '^LNDOTCHI$'
+      - '^LNDOTCLI$'
+    unit: million ha
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+
+
+  # Water Section
+  # Mapping total capacity for total water resource technology
+  - iamc_variable: "Water Withdrawal"
+    capacity: ["^RSCPRC$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for public water demand technologies
+  - iamc_variable: "Water Withdrawal|Municipal Water"
+    capacity: ["^DEMPUBSURWAT$", "^DEMPUBGWTWAT$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for agricultural water demand technologies
+  - iamc_variable: "Water Withdrawal|Irrigation"
+    capacity: ["^DEMAGRSURWAT$", "^DEMAGRGWTWAT$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for power water demand technology
+  - iamc_variable: "Water Withdrawal|Electricity"
+    capacity: ["^DEMPWRSURWAT$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+
+
+
+ 

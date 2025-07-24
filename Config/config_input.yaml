@@ -1,0 +1,129 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia" # iso2_x, iso3_x, from_csv, or a name of a country/region # iso2_x, iso3_x, from_csv, or a name of a country/region
+inputs:
+# Import technologies
+  - iamc_variable: 'Variable Cost|Import|Coal'
+    variable_cost: ['^IMPCOA']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+  - iamc_variable: 'Variable Cost|Import|Diesel'
+    variable_cost: ['^IMPDSL']
+    unit: USD/kWh
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for geothermal power technology.
+  - iamc_variable: 'Variable Cost|Power|Geothermal'
+    variable_cost: ['^PWRGEO']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for utility-scale photovoltaic power technology.
+  - iamc_variable: 'Variable Cost|Power|Photovoltaic|Utility'
+    variable_cost: ['^PWRPVU']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for petroleum import technology.
+  - iamc_variable: 'Variable Cost|Import|Petroleum'
+    variable_cost: ['^IMPPET']
+    unit: USD/kWh
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for teff import technology.
+  - iamc_variable: 'Variable Cost|Import|Teff'
+    variable_cost: ['^IMPTEF']
+    unit: USD/ha
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for maize import technology.
+  - iamc_variable: 'Variable Cost|Import|Maize'
+    variable_cost: ['^IMPMAI']
+    unit: USD/ha
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for wheat import technology.
+  - iamc_variable: 'Variable Cost|Import|Wheat'
+    variable_cost: ['^IMPWHE']
+    unit: USD/ha
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for sorghum import technology.
+  - iamc_variable: 'Variable Cost|Import|Sorghum'
+    variable_cost: ['^IMPSOR']
+    unit: USD/ha
+    transform: abs
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for barley import technology.
+  - iamc_variable: 'Variable Cost|Import|Barley'
+    variable_cost: ['^IMPBRL']
+    unit: USD/ha
+    transform: abs
+    osemosys_param: 'VariableCost'
+  - iamc_variable: 'Yield|Cropland|Cereals'
+    variable_cost: ['^WHE']
+    unit: t DM/ha/yr
+    osemosys_param: 'Crop_Yield'
+# Mapping residual capacity for other land technology.
+  - iamc_variable: 'Land Cover|Other|Residual Capacity'
+    capacity: ['^LNDOTH$']
+    unit: Mha
+    transform: abs
+    osemosys_param: 'ResidualCapacity'
+# Mapping residual capacity for teff rainfed crop technology.
+  - iamc_variable: 'Land Cover|Crop|Teff|Rainfed|Residual Capacity'
+    capacity: ['^LNDTEFLR$']
+    unit: Mha
+    transform: abs
+    osemosys_param: 'ResidualCapacity'
+# Mapping residual capacity for teff irrigated crop technology.
+  - iamc_variable: 'Land Cover|Crop|Teff|Irrigated|Residual Capacity'
+    capacity: ['^LNDTEFLI$']
+    unit: Mha
+    transform: abs
+    osemosys_param: 'ResidualCapacity'
+# Mapping residual capacity for maize rainfed crop technology.
+  - iamc_variable: 'Land Cover|Crop|Maize|Rainfed|Residual Capacity'
+    capacity: ['^LNDMAILR$']
+    unit: Mha
+    transform: abs
+    osemosys_param: 'ResidualCapacity'
+ # Power generation technologies
+# Mapping variable cost for hydro power technology (type 001).
+  - iamc_variable: 'Variable Cost|Power|Hydro|Type001'
+    variable_cost: ['^PWRHYD001$']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for hydro power technology (type 002).
+  - iamc_variable: 'Variable Cost|Power|Hydro|Type002'
+    variable_cost: ['^PWRHYD002']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for rooftop photovoltaic power technology.
+  - iamc_variable: 'Variable Cost|Power|Photovoltaic|Rooftop'
+    variable_cost: ['^PWRPVR$']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for hydro power technology (type 004).
+  - iamc_variable: 'Variable Cost|Power|Hydro|Type004'
+    variable_cost: ['^PWRHYD004']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for diesel power technology.
+  - iamc_variable: 'Variable Cost|Power|Diesel'
+    variable_cost: ['^PWRDSL']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for wind power technology.
+  - iamc_variable: 'Variable Cost|Power|Wind'
+    variable_cost: ['^PWRWND']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for transmission power technology.
+  - iamc_variable: 'Variable Cost|Power|Transmission'
+    variable_cost: ['^PWRTRN']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'
+# Mapping variable cost for biomass power technology.
+  - iamc_variable: 'Variable Cost|Power|Biomass'
+    variable_cost: ['^PWRBIO001']
+    unit: USD/kWh
+    osemosys_param: 'VariableCost'

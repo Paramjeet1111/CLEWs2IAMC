@@ -1,0 +1,192 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia" # iso2_x, iso3_x, from_csv, or a name of a country/region
+results:
+#Energy
+  # Mapping new agricultural diesel demand capacity for water use across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Oil'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMAGRDSL$']
+    unit: GW/yr
+    transform: abs
+# Mapping new transport biofuel demand capacity for water use across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMTRABIO$']
+    unit: GW/yr
+    transform: abs
+# Mapping new coal capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Solids|Coal'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^MINCOA$']
+    unit: GW/yr
+    transform: abs
+# Mapping new gas mining capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Gas'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^MINGAS$']
+    unit: GW/yr
+    transform: abs
+ # Mapping new gas power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Gas'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRGAS$']
+    unit: GW/yr
+    transform: abs
+  # Mapping new transport power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRTRN$']
+    unit: GW/yr
+    transform: abs
+# Mapping new wind resource capacity for energy generation across different years.
+#  - iamc_variable: 'Capacity Additions|Electricity|Wind'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCWND$']
+#    unit: GW/yr
+#    transform: abs
+  # Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity|Electricity|Solar'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^RSCSOL$']
+    unit: GW/yr
+    transform: abs
+      # Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Solar|PV'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRPVU$']
+    unit: GW/yr
+    transform: abs
+# Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Solar|PV|Residential'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRPVR$']
+    unit: GW/yr
+    transform: abs
+# Mapping new hydropower resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Hydro'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRHYD001$','^PWRHYD002$','^PWRHYD004$',]
+    unit: GW/yr
+    transform: abs   
+
+# Mapping new hydropower resource capacity for energy generation across different years.
+#  - iamc_variable: 'Capacity Additions|Electricity|Hydro'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCHYD$']
+#    unit: GW/yr
+#    transform: abs
+  # Mapping new wind power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Wind'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRWND$']
+    unit: GW/yr
+    transform: abs
+# Mapping new solar power capacity for energy generation across different years.
+#   - iamc_variable: 'Capacity Additions|Electricity|Solar|PV'
+#     osemosys_param: 'NewCapacity'
+#     capacity: ['^PWRSOL$']
+#     unit: GW/yr
+#     transform: abs
+# Mapping new diesel power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Oil|diesel '
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRDSL$']
+    unit: GW/yr
+    transform: abs
+# Mapping new Biomass power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRBIO001$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additions to import petroleum power  for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Fossil'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^IMPPET$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additions TRANSPORT petroleum power  for energy  across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Oil|transport '
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMTRAPET$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additionsRESIDENTAL BIOMASS  for energy  across different years.
+  - iamc_variable: 'Capacity Additions|Gases|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMRESBIO$']
+    unit: GW/yr
+    transform: abs
+
+
+# Land Demand
+  # Mapping new land resource capacity for land use across different years.
+  - iamc_variable: 'Land Cover'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^RSCLND$']
+    unit: million ha
+    transform: abs
+  # Mapping new rainfed maize land capacity for land use across different years.
+  - iamc_variable: 'Land Cover|Cropland|Cereals|Rainfed'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^LNDMAIRNF$', '^LNDRICRNF$']
+    unit: million ha
+    transform: abs
+# Mapping new rainfed rice land capacity for land use across different years.
+#  - iamc_variable: 'Land Use|Crop|Rice|Rainfed'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDRICRNF$']
+#    unit: million ha
+#    transform: abs
+  # Mapping new irrigated maize land capacity for land use across different years.
+  - iamc_variable: 'Land Cover|Cropland|Cereals|Irrigated'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^LNDMAIIRR$','^LNDRICIRR$']
+    unit: million ha
+    transform: abs
+# Mapping new irrigated rice land capacity for land use across different years.
+#    - iamc_variable: 'Land Use|Crop|Rice|Irrigated'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDRICIRR$']
+#   unit: million ha
+#    transform: abs
+  # Mapping new livestock land capacity for land use across different years.
+  - iamc_variable: 'Land Cover|Built-Up Area'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^LNDBLT$']
+    unit: million ha
+    transform: abs
+  # Mapping new land water capacity for land use across different years.
+  - iamc_variable: 'Water Ecosystems'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^LNDWAT$']
+    unit: km³
+    transform: abs
+
+
+  # Water Demand
+  # Mapping new processing resource capacity for water use across different years.
+#  - iamc_variable: 'Water|Processing|Resource'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCPRC$']
+#    unit: km³
+#    transform: abs
+  # Mapping new public surface water demand capacity for water use across different years.
+  - iamc_variable: 'Water Withdrawal|Municipal Water'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMPUBSURWAT$']
+    unit: km3/yr
+    transform: abs
+  # Mapping new agricultural surface water demand capacity for water use across different years.
+  - iamc_variable: 'Water Consumption|Irrigation'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMAGRSURWAT$']
+    unit: km3/yr
+    transform: abs
+  # Mapping new power surface water demand capacity for water use across different years.
+  - iamc_variable: 'Water Consumption|Electricity'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMPWRSURWAT$']
+    unit: km3/yr
+    transform: abs
