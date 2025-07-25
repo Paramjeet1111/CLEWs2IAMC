@@ -13,7 +13,7 @@ CLEWs2IAMC/
 │   ├── AccumulatedAnnualDemand.csv
 
 ├── output_path/                        # IAMC format output directory
-└── Main.ipynb                      # Main notebook for processing
+└── Main.ipynb                          # Main notebook for processing
 
 ```
 
