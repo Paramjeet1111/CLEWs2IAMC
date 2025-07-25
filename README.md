@@ -45,7 +45,7 @@ pip install osemosys2iamc pandas pyyaml
 
 ## Usage
 
-1. Place your OSeMOSYS model results in the `Ethiopia/` directory
+1. Place your OSeMOSYS model results in the `MAIN/` directory
 2. Configure the appropriate YAML files for the type of results you want to convert
 3. Run the conversion using either:
    - The Jupyter notebook `Ethiopia.ipynb`
