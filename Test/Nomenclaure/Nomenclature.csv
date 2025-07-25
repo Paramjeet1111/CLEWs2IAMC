@@ -1,0 +1,91 @@
+﻿Code ,Description
+BIO,Biomass 
+GEO,Geothermal 
+SOL,Solar 
+HYD,Hydro 
+WND,Wind
+LFO,Light Fuel Oil
+DSL,Diesel
+ELC001,Electricity for transmssion and distribution
+ELC002,Electricity for end user
+MINBIO,Biomass resource
+MINGEO,Geothermal resource
+MINSOL,Solar resource
+MINHYD,Hydro resource
+MINWND,Wind resource
+IMPLFO,LFO resource
+IMPDSL,DSL resource
+PWRBIO001,Biomass Powerplant
+PWRGEO,Geothermal Powerplant
+PWRSOL001,Solar PV - Utility
+PWRHYD001,Hydro powerplant
+PWRWND001,Wind turbines
+PWROHC001,LFO powerplant
+PWRTRN,Power Transmission
+AGRDSL,Agricultural diesel
+CAR,Cars
+IMPCAR,Car imports
+TRACAR,Car transportation
+TRADSL,Diesel for Transport
+LND,Land 
+MINLND,Land resource
+LNDMAIHR,Land representing high season rainfed maize cultivation
+LNDMAILR,Land representing low season rainfed maize cultivation
+LNDMAIHI,Land representing high season irrigated maize cultivation
+LNDMAILI,Land representing low season irrigated maize cultivation
+LNDBEAHR,Land representing high season rainfed beans cultivation
+LNDBEALR,Land representing low season rainfed beans cultivation
+LNDBEAHI,Land representing high season irrigated beans cultivation
+LNDBEALI,Land representing low season irrigated beans cultivation
+LNDTEAHR,Land representing high season rainfed tea cultivation
+LNDTEALR,Land representing low season rainfed tea cultivation
+LNDTEAHI,Land representing high season irrigated tea cultivation
+LNDTEALI,Land representing low season irrigated tea cultivation
+LNDCOWHR,Land representing high season rainfed cowpeas cultivation
+LNDCOWLR,Land representing low season rainfed cowpeas cultivation
+LNDCOWHI,Land representing high season irrigated cowpeas cultivation
+LNDCOWLI,Land representing low season irrigated cowpeas cultivation
+LNDSORHR,Land representing high season rainfed sorghum cultivation
+LNDSORLR,Land representing low season rainfed sorghum cultivation
+LNDSORHI,Land representing high season irrigated sorghum cultivation
+LNDSORLI,Land representing low season irrigated sorghum cultivation
+LNDOTCHR,Land representing high season rainfed other crops cultivation
+LNDOTCLR,Land representing low season rainfed other crops cultivation
+LNDOTCHI,Land representing high season irrigated other crops cultivation
+LNDOTCLI,Land representing low season irrigated other crops cultivation
+LNDFOR,Land representing forests
+LNDBLT,Land representing built-up land
+LNDWAT,Land representing water bodies
+LNDOTH,Land representing other uses
+MAI,Maize
+BEA,Beans
+TEA,Tea
+COW,Cowpeas
+SOR,Sorghum
+OTC,Other Crops
+CRPMAI,Maize crop
+CRPBEA,Bean crop
+CRPTEA,Tea crop
+CRPCOW,Cowpeas crop
+CRPSOR,Sorghum crop
+CRPOTC,Other Crops
+LFOR,Forests land
+LBLT,Built-up land
+LWAT,water land
+LOTH,other lands
+MINPRC,Precipitation resource
+WTRPRC,Precipitation water
+WTRSUR,Surface water
+WTRGWT,Ground water
+WTREVT,Evapotranspiration water
+AGRWAT,Agricultural water
+PUBWAT,Water for public use
+PWRWAT,Water for power production
+DEMAGRSURWAT,Demand for agricultural surface water
+DEMAGRGWTWAT,Demand for agricultural ground water
+DEMPUBSURWAT,Demand for public surface water
+DEMPUBGWTWAT,Demand for public ground water
+DEMPWRSURWAT,Demand for surface water in powerplants
+DEMPWRGWTWAT,Demand for ground water in powerplants
+DEMTRACAR,Demand for car transportation
+DEMAGRDSL,Demand for Agricultural Diesel
