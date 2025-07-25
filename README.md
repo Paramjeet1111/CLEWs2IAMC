@@ -58,13 +58,25 @@ pip install osemosys2iamc pandas pyyaml
 
 The project includes several configuration files for different types of results (located in the `Config/` directory):
 
-- `Config_capitalInvestment_results.yaml` - For capital investment data
-- `config_demand_results.yaml` - For demand-related results
-- `Config_emissions_results.yaml` - For emissions data
-- `config_new_capacity_results.yaml` - For new capacity additions
-- `Config_TotalCapacity_results.yaml` - For total capacity data
-- `config_usebytech_results.yaml` - For technology utilization data
-- `crop_yield_results.yaml` - For agricultural yields
+### Overview
+
+This tool, implemented in `resultify.py`, converts CLEWs model results and inputs into the IAMC (Integrated Assessment Modeling Consortium) format. It processes input and result CSV files based on a configuration file (`config.yaml`) and outputs the results as an Excel file in IAMC format.
+
+### Configuration File (`config.yaml`)
+
+The `config.yaml` file defines how CLEWs input and result data are mapped to IAMC variables. It specifies the model, scenario, region, and data processing rules for inputs and results, including filtering by technologies, fuels, or emissions, and applying transformations.
+
+#### Key Components
+
+- **Model and Scenario**: Defines the model name (e.g., `OSeMOSYS`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
+
+- **Region**: Specifies the region name (e.g., `Sweden`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
+
+- **Inputs**: Maps input CSV files to IAMC variables, typically for parameters like costs specifications.
+
+- **Results**: Maps result CSV files (e.g., `NewCapacity.csv`) to IAMC variables, specifying filters (e.g., capacity, technology, fuel, emissions) and units (e.g., GW).
+
+- **Transformations**: Optional transformations like `abs` to modify data values (e.g., taking absolute values).
 
 ## Input Data Structure
 
