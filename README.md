@@ -8,86 +8,10 @@ CLEWs2IAMC is a Python toolkit that automates the conversion of (Climate, Land, 
 CLEWs2IAMC/
 ├── Config/
 │   ├── Config_capitalInvestment_results.yaml
-│   ├── config_demand_results_Input.yaml
-│   ├── config_demand_results.yaml
-│   ├── Config_emissions_results.yaml
-│   ├── config_file - Copy.yml
-│   ├── config_input.yaml
-│   ├── config_new_capacity_results.yaml
-│   ├── config_prod_tech_result.yaml
-│   ├── config_result.yml
-│   ├── Config_TotalCapacity_results.yaml
-│   ├── config_usebytech_results.yaml
-│   └── crop_yield_results.yaml
-├── Ethiopia/                           # Results directory
-│   ├── AnnualTechnologyEmission.csv
-│   ├── CapitalInvestment.csv
-│   ├── Demand.csv
-│   ├── NewCapacity.csv
-│   ├── ProductionByTechnologyByMode.csv
-│   ├── TotalCapacityAnnual.csv
-│   └── UseByTechnologyByMode.csv
+
 ├── inputs_path/                        # Input data directory
 │   ├── AccumulatedAnnualDemand.csv
-│   ├── Annual_average_ws_score.csv
-│   ├── AnnualEmissionLimit.csv
-│   ├── AvailabilityFactor.csv
-│   ├── BHI.csv
-│   ├── CapacityFactor.csv
-│   ├── CapacityOfOneTechnologyUnit.csv
-│   ├── CapacityToActivityUnit.csv
-│   ├── CapitalCost.csv
-│   ├── CapitalCostStorage.csv
-│   ├── COMMODITY.csv
-│   ├── Conversionld.csv
-│   ├── Conversionlh.csv
-│   ├── Conversionls.csv
-│   ├── Crop_IDR.csv
-│   ├── Crop_Yield.csv
-│   ├── DAILYTIMEBRACKET.csv
-│   ├── DaysInDayType.csv
-│   ├── DaySplit.csv
-│   ├── DAYTYPE.csv
-│   ├── DiscountRate.csv
-│   ├── DiscountRateIdv.csv
-│   ├── EMISSION.csv
-│   ├── EmissionActivityRatio.csv
-│   ├── EmissionsPenalty.csv
-│   ├── EmissionToActivityChangeRatio.csv
-│   ├── FixedCost.csv
-│   ├── Forest_cover.csv
-│   ├── Harvested_area.csv
-│   ├── HM_area.csv
-│   ├── InputActivityRatio.csv
-│   ├── InputToNewCapacityRatio.csv
-│   ├── InputToTotalCapacityRatio.csv
-│   ├── Irrigated_area.csv
-│   ├── MinStorageCharge.csv
-│   ├── MODE_OF_OPERATION.csv
-│   ├── ModelPeriodEmissionLimit.csv
-│   ├── Net_emissions.csv
-│   ├── OperationalLife.csv
-│   ├── OperationalLifeStorage.csv
-│   ├── OutputActivityRatio.csv
-│   ├── REGION.csv
-│   ├── Relative_annual_water_demand.csv
-│   ├── ResidualCapacity.csv
-│   ├── ResidualStorageCapacity.csv
-│   ├── SEASON.csv
-│   ├── SpecifiedAnnualDemand.csv
-│   ├── SpecifiedDemandProfile.csv
-│   ├── STORAGE.csv
-│   ├── STORAGEINTRADAY.csv
-│   ├── STORAGEINTRAYEAR.csv
-│   ├── StorageLevelStart.csv
-│   ├── TECHNOLOGY.csv
-│   ├── TechnologyActivityByModeLowerLimit.csv
-│   ├── TechnologyActivityByModeUpperLimit.csv
-│   ├── TechnologyActivityDecreaseByModeLimit.csv
-│   ├── TechnologyActivityIncreaseByModeLimit.csv
-│   ├── TechnologyFromStorage.csv
-│   ├── TechnologyToStorage.csv
-│   └── TIMESLICE.csv
+
 ├── output_path/                        # IAMC format output directory
 └── Ethiopia.ipynb                      # Main notebook for processing
 
