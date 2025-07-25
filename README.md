@@ -7,12 +7,13 @@ CLEWs2IAMC is a Python toolkit that automates the conversion of (Climate, Land, 
 ```
 CLEWs2IAMC/                             
 ├── Config/                             # Config data directory
-│   ├── Config_capitalInvestment_results.yaml
 
-├── inputs_path/                        # Input data directory
-│   ├── AccumulatedAnnualDemand.csv
+├── inputs_path/                        # CLEWs Input data directory
+
+├── result_path/                        # CLEWs Result data directory
 
 ├── output_path/                        # IAMC format output directory
+
 └── Main.ipynb                          # Main notebook for processing
 
 ```
