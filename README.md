@@ -69,9 +69,9 @@ The `config.yaml` file defines how CLEWs input and result data are mapped to IAM
 
 #### Key Components
 
-- **Model and Scenario**: Defines the model name (e.g., `OSeMOSYS`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
+- **Model and Scenario**: Defines the model name (e.g., `CLEWs_Ethopia`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
 
-- **Region**: Specifies the region name (e.g., `Sweden`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
+- **Region**: Specifies the region name (e.g., `Ethopia`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
 
 - **Inputs**: Maps input CSV files to IAMC variables, typically for parameters like costs specifications.
 
