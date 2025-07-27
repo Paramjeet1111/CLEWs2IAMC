@@ -114,7 +114,7 @@ For more details, see the official IAMC documentation.
 
 - **Model and Scenario**: Defines the model name (e.g., `CLEWs_Ethopia`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
 
-- **iamc_variable**: Refers to standardized variable names used in IAMC reporting. A comprehensive list of these variables can be found in the [IAMconsortium common definitions repository](https://github.com/IAMconsortium/common-definitions.git).
+- **iamc_variable**: Refers to standardized variable names used in IAMC reporting. A comprehensive list of these variables can be found in the Variable list Folder and [IAMconsortium common definitions repository](https://github.com/IAMconsortium/common-definitions.git).
 
 - **Region**: Specifies the region name (e.g., `Ethopia`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
 
@@ -159,7 +159,7 @@ MIT License
 ## Acknowledgements
 - [osemosys2iamc](https://github.com/OSeMOSYS/osemosys2iamc)
 - [OSeMOSYS](https://www.osemosys.org/)
-- [IAMconsortium] (https://github.com/IAMconsortium/common-definitions.git)
+- [IAMconsortium](https://github.com/IAMconsortium/common-definitions.git)
 - [Indicators4CLEWs](https://github.com/Camilogiu/Indicators4CLEWs/)
 - MUIO OSeMOSYS User Interface
 - [IAMCOMPACT](https://www.iam-compact.eu/) project has received funding from the European Union's HORIZON EUROPE Research and Innovation Programme under grant agreement No 101056306
