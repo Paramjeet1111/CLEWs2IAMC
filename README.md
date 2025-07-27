@@ -42,13 +42,12 @@ pip install osemosys2iamc pandas pyyaml
 
 ## Usage
 
-1. Place your OSeMOSYS model results in the `MAIN/` directory
+1. Place your CLEWs model Inputs and results in the `respective` directory
 2. Configure the appropriate YAML files for the type of results you want to convert
-3. Run the conversion using either:
-   - The Jupyter notebook `Ethiopia.ipynb`
-   - Command line interface:
-     ```bash
-     osemosys2iamc <input_path> <results_path> <config_file> <output_file>
+3. Paste respective paths
+4. Run the conversion using:
+   - The Jupyter notebook `MAIN.ipynb`
+
      ```
 
 ### Overview
@@ -148,13 +147,7 @@ The converted results in IAMC format are stored in the `output_path/` directory 
 
 ## IAM Data Validation
 
-### Introduction
-The IAM Data Validation app automates the validation of modelling results for Integrated Assessment Models (IAMs) and climate-economy models. It includes checks for variable and model names, a duplicates finder, and vetting routines based on IPCC AR6 vetting rules (Annex III, Table 11).
-
-### Features
-- Automated validation of variable and model names.
-- Duplicate detection.
-- Vetting checks aligned with IPCC AR6 guidelines.
+In Next step outputs generated from CLEWs2IAMC are introduced to The IAM Data Validation app which automates the validation of CLEWs results for Integrated Assessment Models (IAMs). It includes checks for variable and model names, a duplicates finder, and vetting routines based on IPCC AR6 vetting rules.
 
 ### Deployment
 The app, built with Python and Streamlit, is part of I2AM PARIS, an open-access platform for modelling results. It is available at: [IAM Data Validation App](https://validation.i2am-paris.eu).
@@ -175,6 +168,7 @@ MIT License
 - [osemosys2iamc](https://github.com/OSeMOSYS/osemosys2iamc)
 - [OSeMOSYS](https://www.osemosys.org/)
 - [IAMconsortium](https://github.com/IAMconsortium/common-definitions.git)
+- [i2amparis validation](https://github.com/i2amparis/validation.git)
 - [Indicators4CLEWs](https://github.com/Camilogiu/Indicators4CLEWs/)
 - MUIO OSeMOSYS User Interface
 - [IAMCOMPACT](https://www.iam-compact.eu/) project has received funding from the European Union's HORIZON EUROPE Research and Innovation Programme under grant agreement No 101056306
