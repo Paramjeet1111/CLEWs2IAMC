@@ -146,14 +146,29 @@ Every Model is Unique and Address Namming Conventions As per Indivisual CLEWs Mo
 
 The converted results in IAMC format are stored in the `output_path/` directory as Excel files.
 
+## IAM Data Validation
+
+### Introduction
+The IAM Data Validation app automates the validation of modelling results for Integrated Assessment Models (IAMs) and climate-economy models. It includes checks for variable and model names, a duplicates finder, and vetting routines based on IPCC AR6 vetting rules (Annex III, Table 11).
+
+### Features
+- Automated validation of variable and model names.
+- Duplicate detection.
+- Vetting checks aligned with IPCC AR6 guidelines.
+
+### Deployment
+The app, built with Python and Streamlit, is part of I2AM PARIS, an open-access platform for modelling results. It is available at: [IAM Data Validation App](https://validation.i2am-paris.eu).
+
 ## License
 
 MIT License
 
 ## Contributors
 
-**[S PARAMJEET SINGH](https://github.com/Camilogiu)** - Developer  
-**Francesco Gardumi** - Supervisor  
+**[S PARAMJEET SINGH](https://github.com/Paramjeet1111/CLEWs2IAMC.git)** - Developer 
+
+**[Francesco Gardumi](https://github.com/FraGard)** - Supervisor
+
 **Camilla Lo Giudice** - Co-supervisor
 
 ## Acknowledgements
