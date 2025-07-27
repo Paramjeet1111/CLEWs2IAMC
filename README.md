@@ -51,32 +51,56 @@ pip install osemosys2iamc pandas pyyaml
      osemosys2iamc <input_path> <results_path> <config_file> <output_file>
      ```
 
-## Configuration Files
-
-The project includes several configuration files for different types of results (located in the `Config/` directory):
-
 ### Overview
 
 This tool, implemented in `resultify.py`, converts CLEWs model results and inputs into the IAMC (Integrated Assessment Modeling Consortium) format. It processes input and result CSV files based on a configuration file (`config.yaml`) and outputs the results as an Excel file in IAMC format.
 
-### Configuration File (`config.yaml`)
+## Configuration File (`config.yaml`)
 
 The `config.yaml` file defines how CLEWs input and result data are mapped to IAMC variables. It specifies the model, scenario, region, and data processing rules for inputs and results, including filtering by technologies, fuels, or emissions, and applying transformations.
 
-#### Key Components
+#### Creating Regex Expressions for Mapping
 
-- **Model and Scenario**: Defines the model name (e.g., `CLEWs_Ethopia`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
+Regular expressions (regex) are used in the configuration file to filter and map technologies fuels into IAMC reporting formats. Each regex targets specific patterns in the code to identify technologies like wind (WI), hydro (HY), gas (NG), or solar (SO). These filters help categorize and map technologies and fuels correctly.
 
-- **Region**: Specifies the region name (e.g., `Ethopia`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
+| Regex       | Example Codes       | Explanation                                                                 |
+|-------------|---------------------|-----------------------------------------------------------------------------|
+| `^PWRGAS$`  | PWRGAS              | Matches only if the code is exactly "PWRGAS" (used for gas power plant).   |
+| `^.{2}(WI)` | DKWI00X00, SEWI01I00| Matches codes where "WI" is in the 3rd–4th position (likely Wind technologies). |
+| `^.{2}(HY)` | DEHY01I00, FRHY12X00| "HY" at 3rd–4th position (likely Hydro technologies).                      |
+| `^PWRTRN$`  | PWRTRN              | Matches only if the code is exactly "PWRTRN" (used for power transmission).|
 
-- **Inputs**: Maps input CSV files to IAMC variables, typically for parameters like costs specifications.
+#### YAML Examples for Mapping IAMC Variables
 
-- **Results**: Maps result CSV files (e.g., `NewCapacity.csv`) to IAMC variables, specifying filters (e.g., capacity, technology, fuel, emissions) and units (e.g., GW).
+Below are Simple Regex examples of YAML configurations for mapping:
 
-- **Transformations**: Optional transformations like `abs` to modify data values (e.g., taking absolute values).
+```yaml
+# Agricultural diesel combustion CO2-equivalent emissions
+- iamc_variable: 'Emissions|CO2|Energy|Demand|AFOFI'
+  tech_emi: ["^DEMAGRDSL$"]
+  emissions: [CO2]
+  unit: Mt CO2/yr
+  transform: abs
+  osemosys_param: "AnnualTechnologyEmission"
 
-## IAMC Format
+# Mapping land use for forest cover based on technology and fuel usage.
+- iamc_variable: 'Land Cover|Forest'
+  technology: ['^LNDFOR$']
+  fuel: ['^LND$']
+  unit: million ha
+  transform: abs
+  osemosys_param: 'UseByTechnologyByMode'
 
+# Mapping electricity demand for end users based on fuel usage across different time slices.
+- iamc_variable: 'Final Energy|Electricity'
+  osemosys_param: 'Demand'
+  demand: ['^ELC002$']
+  technology: ['.*']
+  unit: PJ
+  transform: abs
+```
+
+#### Key Components of IAMC Format
 The IAMC format, developed by the Integrated Assessment Modeling Consortium, is widely used for comparing results from different models in energy, climate, land and water and sectoral studies (such as Agriculture, Land Use, Water, transport or industry).
 
 It uses a table structure with these columns:  
@@ -86,7 +110,19 @@ Each project defines standardized "codelists" for consistent comparison.
 
 A notable example using this format is the AR6 Scenario Explorer for the IPCC’s Sixth Assessment Report.
 
-For more details, see the official IAMC documentation.
+For more details, see the official IAMC documentation. 
+
+- **Model and Scenario**: Defines the model name (e.g., `CLEWs_Ethopia`) and scenario (e.g., `NDC_Baseline`) for the IAMC output.
+
+- **iamc_variable**: Refers to standardized variable names used in IAMC reporting. A comprehensive list of these variables can be found in the [IAMconsortium common definitions repository](https://github.com/IAMconsortium/common-definitions.git).
+
+- **Region**: Specifies the region name (e.g., `Ethopia`) or naming convention (e.g., ISO codes or `from_csv`) for data processing.
+
+- **Inputs**: Maps input CSV files to IAMC variables, typically for parameters like costs specifications.
+
+- **Results**: Maps result CSV files (e.g., `NewCapacity.csv`) to IAMC variables, specifying filters (e.g., capacity, technology, fuel, emissions) and units (e.g., GW).
+
+- **Transformations**: Optional transformations like `abs` to modify data values (e.g., taking absolute values).
 
 
 ## Nomenclature
@@ -123,6 +159,7 @@ MIT License
 ## Acknowledgements
 - [osemosys2iamc](https://github.com/OSeMOSYS/osemosys2iamc)
 - [OSeMOSYS](https://www.osemosys.org/)
+- [IAMconsortium] (https://github.com/IAMconsortium/common-definitions.git)
 - [Indicators4CLEWs](https://github.com/Camilogiu/Indicators4CLEWs/)
 - MUIO OSeMOSYS User Interface
 - [IAMCOMPACT](https://www.iam-compact.eu/) project has received funding from the European Union's HORIZON EUROPE Research and Innovation Programme under grant agreement No 101056306
