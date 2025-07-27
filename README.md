@@ -75,13 +75,36 @@ The `config.yaml` file defines how CLEWs input and result data are mapped to IAM
 
 - **Transformations**: Optional transformations like `abs` to modify data values (e.g., taking absolute values).
 
-## Input Data Structure
+## IAMC Format
 
-The `inputs_path/` directory contains all necessary input files for the OSeMOSYS model, organized into:
+The IAMC format, developed by the Integrated Assessment Modeling Consortium, is widely used for comparing results from different models in energy, climate, land and water and sectoral studies (such as Agriculture, Land Use, Water, transport or industry).
 
-- Model Parameters (technical and economic parameters)
-- Sets (model dimensions and categories)
-- Additional Data (supplementary data for CLEWs analysis)
+It uses a table structure with these columns:  
+`model`, `scenario`, `region`, `variable`, `unit`, and time steps.
+
+Each project defines standardized "codelists" for consistent comparison.
+
+A notable example using this format is the AR6 Scenario Explorer for the IPCC’s Sixth Assessment Report.
+
+For more details, see the official IAMC documentation.
+
+
+## Nomenclature
+
+CLEWs2IAMC uses following  codes for mapping Example:
+
+| Code    | Description                                   |
+|---------|-----------------------------------------------|
+| MAI     | Maize                                         |
+| BEA     | Beans                                         |
+| WTRPRC  | Precipitation water                           |
+| WTRSUR  | Surface water                                 |
+| LND     | Land                                          |
+| DSL     | Diesel                                        |
+| ELC001  | Electricity for transmission and distribution |
+| ELC002  | Electricity for end user                      |
+
+Every Model is Unique and Address Namming Conventions As per Indivisual CLEWs Model
 
 ## Output
 
