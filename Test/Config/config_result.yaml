@@ -1,0 +1,1429 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia" # iso2_x, iso3_x, from_csv, or a name of a country/region
+results:
+#Emissions
+# Energy Section
+  # Coal extraction processing and equivalent emissions
+  - iamc_variable: "Gross Emissions|CO2|Energy|Supply|Solids"
+    tech_emi: ["^MINCOA$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  #Coal Import emissions  [NOT IN DATABASE]
+  - iamc_variable: "Emissions|CO2EQ|Energy|Supply|Solids|Coal Import"
+    tech_emi: ["^IMPCOA$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Natural gas extraction and processing and CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Supply|Gases"
+    tech_emi: ["^MINGAS$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply|Gases|Gas"
+    tech_emi: ["^MINGAS$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Agricultural diesel combustion CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Demand|AFOFI"
+    tech_emi: ["^DEMAGRDSL$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Demand|AFOFI" 
+    tech_emi: ["^DEMAGRDSL$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Transport bioenergy combustion and CO2-equivalent emissions
+  - iamc_variable: "Emissions|CO2|Energy|Demand|Transportation"
+    tech_emi: ["^DEMTRABIO$"]
+    emissions: [CO2]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Demand|Transportation"
+    tech_emi: ["^DEMTRABIO$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Imported diesel CO2-equivalent emissions 
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply"
+    tech_emi: ["^IMPDSL$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+   #Imported petroleum CO2-equivalent emissions [NOT IN DATABASE]
+  - iamc_variable: 'Emissions|Kyoto Gases|Energy|Supply|Fugitive'
+    tech_emi: ['^IMPPET$']
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: 'AnnualTechnologyEmission'
+
+  # Land Section
+  # Maize Crop (non-flooded) N2O and (irrigated) N2O emissions
+  - iamc_variable: "Emissions|N2O|AFOLU|Land"
+    tech_emi: ["^LNDMAIRNF$", "^LNDMAIIRR$"]
+    emissions: [N2O]
+    unit: kt N2O/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Maize Crop (non-flooded) and (irrigated) CO2-equivalent emissions
+  - iamc_variable: "Emissions|Kyoto Gases|AFOLU"
+    tech_emi: ["^LNDMAIRNF$", "^LNDMAIIRR$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Rice cultivation (non-flooded) and (irrigated) CH4 emissions
+  - iamc_variable: "Emissions|CH4|AFOLU|Agriculture|Rice"
+    tech_emi: ["^LNDRICRNF$", "^LNDRICIRR$"]
+    emissions: [CH4]
+    unit: Mt CH4/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Rice cultivation (non-flooded) and (irrigated) CO2-equivalent emissions
+  - iamc_variable: "Emissions|Kyoto Gases|AFOLU|Agriculture|Rice"
+    tech_emi: ["^LNDRICRNF$", "^LNDRICIRR$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+  # Forestry CO2 emissions or sequestration
+  - iamc_variable: "Carbon Removal|Land Use|Forest Management"
+    tech_emi: ["^LNDFOR$"]
+    emissions: ["CO2"]
+    unit: Mt CO2/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+    
+    # Biomass resource CO2-equivalent emissions 
+  - iamc_variable: "Emissions|Kyoto Gases|Energy|Supply|Gases|Biomass"
+    tech_emi: ["^MINBIO$"]
+    emissions: [CO2EQ]
+    unit: Mt CO2-equiv/yr
+    transform: abs
+    osemosys_param: "AnnualTechnologyEmission"
+
+# UseByTechnologyByMode
+ # Energy Section
+ # Mapping electricity use for agricultural purposes based on technology and fuel usage for water pumping
+  - iamc_variable: "Final Energy|Agriculture|Electricity"
+    technology: ["^DEMAGRGWTWAT$", "^DEMAGRSURWAT$"]
+    fuel: ["^ELC002$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+      # Mapping electricity use for public surface purposes based on technology and fuel usage for water pumping
+  - iamc_variable: "Final Energy|Commercial|Water|Surface Water Extraction"
+    technology: ["^DEMAGRSURWAT$"]
+    fuel: ["^ELC002$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping electricity use for public ground purposes based on technology and fuel usage for water pumping
+  - iamc_variable: "Final Energy|Commercial|Water|Groundwater Extraction"
+    technology: ["^DEMAGRGWTWAT$"]
+    fuel: ["^ELC002$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping electricity used for pumping surface water for Power plant based on technology and fuel usage.
+  - iamc_variable: "Final Energy|Commercial|Water|Transfer"
+    technology: ["^DEMPWRSURWAT$"]
+    fuel: ["^ELC002$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping Primary energy coal for coal power plant based on technology and fuel usage.
+  - iamc_variable: "Primary Energy|Coal|Solids"
+    technology: ["^PWRCOA$"]
+    fuel: ["^COA$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping transport DIESEL FOR DIESEL POWER PLANT based on technology and fuel usage.
+  - iamc_variable: "Primary Energy|Oil|Electricity"
+    technology: ["^PWRDSL$"]
+    fuel: ["^DSL$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping Primary energy Gas for gas power plant based on technology and fuel usage.
+  - iamc_variable: "Primary Energy|Fossil|Gases"
+    technology: ["^PWRGAS$"]
+    fuel: ["^GAS$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping transport biofuels from crop residue based on technology and fuel usage.
+  - iamc_variable: "Primary Energy|Biomass|Residues|Crop Residues"
+    technology: ["^DEMTRABIO$"]
+    fuel: ["^CRPMAI$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping secondary energy electricity used for transmission based on technology and fuel usage.
+  - iamc_variable: "Secondary Energy|Electricity"
+    technology: ["^PWRTRN$"]
+    fuel: ["^ELC001$"]
+    unit: PJ/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping secondary energy electricity from wind based on technology and fuel usage.
+  - iamc_variable: "Wind Energy|Electricity|Wind"
+    technology: ["^PWRWND$"]
+    fuel: ["^WND$"]
+    unit: PJ
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping secondary energy electricity from solar based on technology and fuel usage.
+  - iamc_variable: "solar energy availability|Electricity"
+    technology: ["^PWRSOL$"]
+    fuel: ["^SOL$"]
+    unit: PJ
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Land Section
+  # Mapping land used by built-up area development based on technology and fuel usage.
+  - iamc_variable: 'Land Cover|Built-Up Area'
+    technology: ['^LNDBLT$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for forest cover based on technology and fuel usage.
+  - iamc_variable: 'Land Cover|Forest'
+    technology: ['^LNDFOR$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for SUGARCANE BIOFUEL RAINFED production
+  - iamc_variable: 'Land Cover|Cropland|Sugar Crops|Rainfed'
+    technology: ['^LNDSGCHR$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for SUGARCANE BIOFUEL IRRIGATED production
+  - iamc_variable: 'Land Cover|Cropland|Sugar Crops|Irrigated'
+    technology: ['^LNDSGCHI$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for OTHER CROPS RAINFED production
+  - iamc_variable: 'Land Cover|Cropland|Other Crops|Rainfed'
+    technology: ['^LNDOTCLR$', '^LNDOTCHR$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for OTHER CROPS IRRIGATED production
+  - iamc_variable: 'Land Cover|Cropland|Other Crops|Irrigated'
+    technology: ['^LNDOTCLI$', '^LNDOTCHI$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for RAINFED energy crops
+  - iamc_variable: 'Land Cover|Cropland|Energy Crops|Rainfed'
+    technology:
+      ['^LNDRICRNF$', '^LNDMAIIRNF$', '^LNDWHELR$', '^LNDWHEHR$', '^LNDMAIHR$',
+       '^LNDMAILR$', '^LNDSORLR$', '^LNDSORHR$', '^LNDBRLHR$', '^LNDBRLR$',
+       '^LNDCERLR$', '^LNDCERHR$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for IRRIGATED cereals
+  - iamc_variable: 'Land Cover|Cropland|Cereals|Irrigated'
+    technology:
+      ['^LNDMAILI$', '^LNDMAIHI$', '^LNDRICIRR$', '^LNDMAIIRR$', '^LNDWHELI$',
+       '^LNDWHEHI$', '^LNDSORLI$', '^LNDSORHI$', '^LNDBRLLI$', '^LNDBRLHI$',
+       '^LNDCERLI$', '^LNDCERHI$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping land use for water bodies
+  - iamc_variable: 'Water Ecosystems'
+    technology: ['^LNDWAT$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Mapping total land use
+  - iamc_variable: 'Land Cover'
+    technology: ['^LNDBLT$', '^LNDFOR$', '^LNDMAIIRR$', '^LNDMAIRNF$', '^LNDRICIRR$', '^LNDRICRNF$', '^LNDWAT$']
+    fuel: ['^LND$']
+    unit: million ha
+    transform: abs
+    osemosys_param: 'UseByTechnologyByMode'
+
+  # Water Section
+  # Mapping water for agricultural purposes
+  - iamc_variable: "Water Withdrawal|Irrigation"
+    technology:
+      ["^LNDMAIIRR", "^LNDRICIRR$", "^LNDBRLHI$", "^LNDBRLLI$", "^LNDCERHI$", "^LNDCERLI$",
+       "^LNDCOFHI$", "^LNDCOFLI$", "^LNDMAIHI$", "^LNDMAILI$", "^LNDOTCHI$", "^LNDOTCLI$",
+       "^LNDSORHI$", "^LNDSORLI$", "^LNDWHEHI$", "^LNDWHELI$", "^LNDSGCHI$"]
+    fuel: ["^AGRWAT"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping water withdrawal for POWER GENERATION
+  - iamc_variable: "Water Withdrawal|Electricity"
+    technology: ["^DEMPWRSURWAT$"]
+    fuel: ["^WTRSUR$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping water withdrawal for public/domestic use
+  - iamc_variable: "Water Consumption|Municipal Water"
+    technology: ["^DEMPUBGWTWAT$", "^DEMPUBSURWAT$"]
+    fuel: ["^WTRSUR$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping water precipitation
+  - iamc_variable: "Water Flows|Precipitation"
+    technology:
+      ["^LNDBLT$", "^LNDFOR$", "^LNDMAIIRR$", "^LNDRICIRR$", "^LNDWAT$", "^LNDWAT$",
+       "^LNDMAIIRR", "^LNDRICIRR$", "^LNDBRLHR$", "^LNDBRLLR$", "^LNDBRLHI$", "^LNDBRLLI$",
+       "^LNDCERHR$", "^LNDCERLR$", "^LNDCERHI$", "^LNDCERLI$", "^LNDCOFHR$", "^LNDCOFLR$",
+       "^LNDCOFHI$", "^LNDCOFLI$", "^LNDMAIHR$", "^LNDMAILR$", "^LNDMAIHI$", "^LNDMAILI$",
+       "^LNDOTCHR$", "^LNDOTCLR$", "^LNDOTCHI$", "^LNDOTCLI$", "^LNDSORHR$", "^LNDSORLR$",
+       "^LNDSORHI$", "^LNDSORLI$", "^LNDWHEHR$", "^LNDWHELR$", "^LNDWHEHI$", "^LNDWHELI$",
+       "^LNDSGCHI$"]
+    fuel: ["^WTRPRC$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+  # Mapping total water consumption
+  - iamc_variable: "Water Consumption"
+    technology:
+      ["^DEMAGRGWTWAT$", "^DEMAGRSURWAT$", "^DEMPUBGWTWAT$", "^DEMPUBSURWAT$", "^DEMPWRSURWAT$"]
+    fuel: ["^WTRSUR$"]
+    unit: km3/yr
+    transform: abs
+    osemosys_param: "UseByTechnologyByMode"
+
+
+# Demand  
+    # Energy Demand
+  # Mapping electricity demand for end users based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^ELC002$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+ # Mapping electricity demand for TRANSMISSION based on fuel usage across different time slices.
+  - iamc_variable: 'Secondary Energy|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^ELC001$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+ # Mapping electricity demand for Residential based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Residential|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMRESEL002$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+     # Mapping electricity demand for Industry based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Industry|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMINDEL002$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping electricity demand for end users based on fuel usage across different time slices.
+  - iamc_variable: 'Final Energy|Commercial|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^DEMCOMEL002$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping agricultural diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Agriculture'
+    osemosys_param: 'Demand'
+    demand: ['^AGRDSL$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping biomass demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Biomass'
+    osemosys_param: 'Demand'
+    demand: ['^BIO$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Commercial|Liquids|Oil'
+    osemosys_param: 'Demand'
+    demand: ['^DSL$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+# Mapping diesel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Other Sector|Heat|Geothermal'
+    osemosys_param: 'Demand'
+    demand: ['^GEO$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping fuel oil demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Fuel Oil'
+    osemosys_param: 'Demand'
+    demand: ['^LFO$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping refined fuel oil demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Fuel Oil|Refined'
+    osemosys_param: 'Demand'
+    demand: ['^LFOR$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+
+  # Mapping transport biofuel demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Transportation|Liquids'
+    osemosys_param: 'Demand'
+    demand: ['^TRABIO$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+  # Mapping transport ENERGY demand for energy use across different time slices.
+  - iamc_variable: 'Final Energy|Transportation'
+    osemosys_param: 'Demand'
+    demand: ['^DEMTRA$']
+    technology: ['.*']
+    unit: PJ
+    transform: abs
+
+# Land Demand
+
+  # Mapping bean crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Feed|Other Crops'
+    osemosys_param: 'Demand'
+    demand: ['^CRPBEA$']
+    technology: ['.*']
+    unit: million t DM/yr
+    transform: abs
+  # Mapping sugar cane crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Food|Sugar Crops'
+    osemosys_param: 'Demand'
+    demand: ['^CRPSGC$']
+    technology: ['.*']
+    unit:  million t DM/yr
+    transform: abs
+# Mapping wheat crop demand for land use across different time slices.
+  - iamc_variable: 'Agricultural Demand|Crops|Feed|Cereals'
+    osemosys_param: 'Demand'
+    demand: ['^CRPWHE$','^CRPMAI$','^CRPSOR$','^CRPBRL$','^CRPOTC$','^CRPCER$','^CRPOTC$','^CRPOTC$']
+    technology: ['.*']
+    unit: million t DM/yr
+    transform: abs
+
+ # Mapping  demand for land use across built up environment across different time slices.
+#  - iamc_variable: 'Land Cover|Built-Up Area'
+#    osemosys_param: 'Demand'
+#    demand: ['^LBLT$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+  # Mapping total land demand for land use across different time slices.
+#  - iamc_variable: 'Land Cover'
+#    osemosys_param: 'Demand'
+#    demand: ['^LND$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+  # Mapping other land demand for land use across different time slices.
+#  - iamc_variable: 'Land Cover|Other Land'
+#    osemosys_param: 'Demand'
+#    demand: ['^LOTH$']
+#    technology: ['.*']
+#    unit: million ha
+#    transform: abs
+
+
+
+# Water Demand
+  # Mapping agricultural water demand for water use across different time slices.
+  - iamc_variable: 'Water Withdrawal|Irrigation'
+    osemosys_param: 'Demand'
+    demand: ['^AGRWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping land water demand for water use across different time slices.
+  - iamc_variable: 'Land Use|Water'
+    osemosys_param: 'Demand'
+    demand: ['^LWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+ # Mapping public water demand for domestic use based on fuel usage across different time slices.
+  - iamc_variable: 'Water Withdrawal|Municipal Water'
+    osemosys_param: 'Demand'
+    demand: ['^PUBWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping power water demand for water use across different time slices.
+  - iamc_variable: 'Water Withdrawal|Electricity'
+    osemosys_param: 'Demand'
+    demand: ['^PWRWAT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping water groundwater demand for water use across different time slices.
+# Note not in Common template
+  - iamc_variable: 'Water Withdrawal|Municipal Water|Groundwate'
+    osemosys_param: 'Demand'
+    demand: ['^WTRGWT$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+  # Mapping water processing demand for water use across different time slices. 
+# Note not in Common template
+  - iamc_variable: 'Water Flows|Precipitation'
+    osemosys_param: 'Demand'
+    demand: ['^WTRPRC$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+# Mapping water surface demand for water use across different time slices.
+# Note not in Common template
+  - iamc_variable: 'Water Withdrawal|Municipal Water|Surface'
+    osemosys_param: 'Demand'
+    demand: ['^WTRSUR$']
+    technology: ['.*']
+    unit: km3/yr
+    transform: abs
+
+#capital investment
+
+# Energy Section
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Gas'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRGAS$']
+    unit: USD/GWh/year
+  # Mapping capital investment for transport power technology across different years.  
+  - iamc_variable: 'Investment|Energy Supply|Electricity'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRTRN$']
+    unit: USD/GWh/year
+
+  # Mapping capital investment for wind power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Wind'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRWND$']
+    unit: USD/GWh/year
+
+  # Mapping capital investment for solar power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Solar'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRSOL$' ]
+    unit: USD/GWh/year
+# Mapping capital investment for solar power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Solar|PV'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRPVR$' ]
+    unit: USD/GWh/year
+# Mapping capital investment for Hydro Power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Hydro'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRHYD001$','^PWRHYD002$','^PWRHYD004$',]
+    unit: USD/GWh/year
+# Mapping capital investment for Geothermal Power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Geothermal'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRGEO$']
+    unit: USD/GWh/year
+  # Mapping capital investment for Diesel power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Oil'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^PWRDSL$']
+    unit: USD/GWh/year
+ # Mapping capital investment for coal imports for power technology across different years.
+  - iamc_variable: 'Investment|Energy Supply|Electricity|Coal'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^IMPCOA$']
+    unit: USD/GWh/year
+ # Mapping capital investment for diesel imports for power technology across different years.
+ #  - iamc_variable: 'Investment|Energy Supply|Electricity|Oil'
+ #    osemosys_param: 'CapitalInvestment'
+ #    capacity: ['^IMPDSL$']
+ #    unit: USD/GWh/year
+
+
+  # Land Demand
+  # Mapping capital investment for Agriculturee technology across different years.
+  - iamc_variable: 'Investment|Agriculture'
+    osemosys_param: 'CapitalInvestment'
+    capacity: 
+      - '^RSCLND$'
+      - '^LNDRICRNF$'
+      - '^LNDRICIRR$'
+      - '^LNDCERHR$'
+      - '^LNDCERLR$'
+      - '^LNDCERHI$'
+      - '^LNDCERLI$'
+      - '^LNDMAIHR$'
+      - '^LNDMAILR$'
+      - '^LNDMAIHI$'
+      - '^LNDMAILI$'
+      - '^LNDWHEHR$'
+      - '^LNDWHELR$'
+      - '^LNDWHEHI$'
+      - '^LNDWHELI$'
+      - '^LNDSORHR$'
+      - '^LNDSORLR$'
+      - '^LNDSORHI$'
+      - '^LNDSORLI$'
+      - '^LNDBRLHR$'
+      - '^LNDBRLLR$'
+      - '^LNDBRLHI$'
+      - '^LNDBRLLI$'
+      - '^LNDBRLLI$'
+      - '^LNDCOFHR$'
+      - '^LNDCOFLR$'
+      - '^LNDCOFHI$'
+      - '^LNDCOFLI$'
+      - '^LNDOTCHR$'
+      - '^LNDOTCLR$'
+      - '^LNDOTCHI$'
+      - '^LNDOTCLI$'
+      - '^LNDSGCHI$'
+      - '^LNDOTCLI$'
+    unit: USD/GWh/year
+# Mapping capital investment for forest management land technology across different years.               
+  - iamc_variable: 'Investment|Energy Supply|Solids|Biomass'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^LNDFOR$']
+    unit: USD/GWh/year
+  
+# Mapping capital investment for livestock land technology across different years.               #NOT IN Common File
+  - iamc_variable: 'Investment|Built-Up Area'
+    osemosys_param: 'CapitalInvestment'
+    capacity: ['^LNDBLT$']
+    unit: USD/GWh/year
+#NewCapacity
+#Energy
+  # Mapping new agricultural diesel demand capacity for water use across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Oil'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMAGRDSL$']
+    unit: GW/yr
+    transform: abs
+# Mapping new transport biofuel demand capacity for water use across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMTRABIO$']
+    unit: GW/yr
+    transform: abs
+# Mapping new coal capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Solids|Coal'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^MINCOA$']
+    unit: GW/yr
+    transform: abs
+# Mapping new gas mining capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Gas'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^MINGAS$']
+    unit: GW/yr
+    transform: abs
+ # Mapping new gas power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Gas'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRGAS$']
+    unit: GW/yr
+    transform: abs
+  # Mapping new transport power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRTRN$']
+    unit: GW/yr
+    transform: abs
+# Mapping new wind resource capacity for energy generation across different years.
+#  - iamc_variable: 'Capacity Additions|Electricity|Wind'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCWND$']
+#    unit: GW/yr
+#    transform: abs
+  # Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity|Electricity|Solar'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^RSCSOL$']
+    unit: GW/yr
+    transform: abs
+      # Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Solar|PV'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRPVU$']
+    unit: GW/yr
+    transform: abs
+# Mapping new solar resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Solar|PV|Residential'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRPVR$']
+    unit: GW/yr
+    transform: abs
+# Mapping new hydropower resource capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Hydro'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRHYD001$','^PWRHYD002$','^PWRHYD004$',]
+    unit: GW/yr
+    transform: abs   
+
+# Mapping new hydropower resource capacity for energy generation across different years.
+#  - iamc_variable: 'Capacity Additions|Electricity|Hydro'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCHYD$']
+#    unit: GW/yr
+#    transform: abs
+  # Mapping new wind power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Wind'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRWND$']
+    unit: GW/yr
+    transform: abs
+# Mapping new solar power capacity for energy generation across different years.
+#   - iamc_variable: 'Capacity Additions|Electricity|Solar|PV'
+#     osemosys_param: 'NewCapacity'
+#     capacity: ['^PWRSOL$']
+#     unit: GW/yr
+#     transform: abs
+# Mapping new diesel power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Oil|diesel '
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRDSL$']
+    unit: GW/yr
+    transform: abs
+# Mapping new Biomass power capacity for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^PWRBIO001$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additions to import petroleum power  for energy generation across different years.
+  - iamc_variable: 'Capacity Additions|Electricity|Fossil'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^IMPPET$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additions TRANSPORT petroleum power  for energy  across different years.
+  - iamc_variable: 'Capacity Additions|Liquids|Oil|transport '
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMTRAPET$']
+    unit: GW/yr
+    transform: abs
+# Mapping Capacity additionsRESIDENTAL BIOMASS  for energy  across different years.
+  - iamc_variable: 'Capacity Additions|Gases|Biomass'
+    osemosys_param: 'NewCapacity'
+    capacity: ['^DEMRESBIO$']
+    unit: GW/yr
+    transform: abs
+
+
+# Land Demand
+#  # Mapping new land resource capacity for land use across different years.
+#  - iamc_variable: 'Land Cover'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCLND$']
+#    unit: million ha
+#    transform: abs
+  # Mapping new rainfed maize land capacity for land use across different years.
+#  - iamc_variable: 'Land Cover|Cropland|Cereals|Rainfed'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDMAIRNF$', '^LNDRICRNF$']
+#    unit: million ha
+#    transform: abs
+# Mapping new rainfed rice land capacity for land use across different years.
+#  - iamc_variable: 'Land Use|Crop|Rice|Rainfed'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDRICRNF$']
+#    unit: million ha
+#    transform: abs
+  # Mapping new irrigated maize land capacity for land use across different years.
+#  - iamc_variable: 'Land Cover|Cropland|Cereals|Irrigated'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDMAIIRR$','^LNDRICIRR$']
+#    unit: million ha
+#    transform: abs
+# Mapping new irrigated rice land capacity for land use across different years.
+#   - iamc_variable: 'Land Use|Crop|Rice|Irrigated'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDRICIRR$']
+#   unit: million ha
+#    transform: abs
+  # Mapping new livestock land capacity for land use across different years.
+#  - iamc_variable: 'Land Cover|Built-Up Area'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDBLT$']
+#    unit: million ha
+#    transform: abs
+  # Mapping new land water capacity for land use across different years.
+#  - iamc_variable: 'Water Ecosystems'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^LNDWAT$']
+#    unit: km³
+#    transform: abs
+
+# Water Demand
+# Mapping new processing resource capacity for water use across different years.
+#  - iamc_variable: 'Water|Processing|Resource'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^RSCPRC$']
+#    unit: km³
+#    transform: abs
+  # Mapping new public surface water demand capacity for water use across different years.
+#  - iamc_variable: 'Water Withdrawal|Municipal Water'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^DEMPUBSURWAT$']
+#    unit: km3/yr
+#    transform: abs
+  # Mapping new agricultural surface water demand capacity for water use across different years.
+#  - iamc_variable: 'Water Consumption|Irrigation'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^DEMAGRSURWAT$']
+#    unit: km3/yr
+#    transform: abs
+  # Mapping new power surface water demand capacity for water use across different years.
+#  - iamc_variable: 'Water Consumption|Electricity'
+#    osemosys_param: 'NewCapacity'
+#    capacity: ['^DEMPWRSURWAT$']
+#    unit: km3/yr
+#    transform: abs
+
+#Total Capacity 
+  # Energy Section
+  # Mapping total capacity for coal mining technology
+  - iamc_variable: "Resource|Extraction|Coal"                                             
+    capacity: ["^MINCOA$"]
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for Biomass Power Generation technology
+  - iamc_variable: "Capacity|Electricity|Biomass|w/o CCS"                                             
+    capacity: ["^PWRBIO001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for gas mining technology
+  - iamc_variable: "Resource|Extraction|Gas"                                                
+    capacity: ["^MINGAS$"]
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for coal power technology
+  - iamc_variable: "Capacity|Electricity|Coal"
+    capacity: ["^PWRCOA001$","^PWRCOA$","^PWRCOA002$",]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for gas power technology
+  - iamc_variable: "Capacity|Electricity|Gas"
+    capacity: ["^PWRGAS$", "^PWRNGS001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for transmission power technology
+  - iamc_variable: "Capacity|Electricity"
+    capacity: ["^PWRTRN$","^PWRTRN001$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+  
+  # Mapping total capacity for wind resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Wind"
+    capacity: ["^PWRWND$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for solar resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar"
+    capacity: ["^PWRSOL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+    
+  # Mapping total capacity for solar pv off grid and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar|PV|Residential"
+    capacity: ["^PWRPVR$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for solar pv Utility and power technologies
+  - iamc_variable: "Capacity|Electricity|Solar|PV|Commercial"
+    capacity: ["^PWRPVU$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+    
+  # Mapping total capacity for hydro resource and power technologies
+  - iamc_variable: "Capacity|Electricity|Hydro"
+    capacity: ["^PWRHYD$","^PWRHYD001$","^PWRHYD002$","^PWRHYD004$",]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for agricultural diesel demand technology
+  - iamc_variable: "Final Energy|Agriculture|Liquids|Oil"
+    capacity: ["^DEMAGRDSL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+# Mapping total capacity for Diesel Power Plant technology
+  - iamc_variable: "Capacity|Electricity|Oil"
+    capacity: ["^PWRDSL$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual" 
+  # Mapping total capacity Geothermal power technology
+  - iamc_variable: "Capacity|Electricity|Geothermal"
+    capacity: ["^PWRGEO$"]
+    unit: GW
+    transform: abs
+    osemosys_param: "TotalCapacityAnnual"
+
+  # Land Section
+ #  # Mapping total capacity for built-up land technology
+ #  - iamc_variable: "Land Cover|Built-Up Area"
+ #    capacity: ["^LNDBLT$"]
+ #    unit: million ha
+ #    transform: abs
+ #    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for forest land technology
+#  - iamc_variable: "Land Cover|Forest"
+#    capacity: ["^LNDFOR$"]
+#   unit: million ha
+#   transform: abs
+#   osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for water land technology
+ #  - iamc_variable: "Water Ecosystems"
+#    capacity: ["^LNDWAT$"]
+#    capacity: ["^LNDWAT$"]
+#    unit: million ha
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for maize and rice rainfed crop technologies
+#  - iamc_variable: "Land Cover|Cropland|Cereals|Rainfed"
+#    capacity: ["^LNDMAIRNF$", "^LNDRICRNF$"]
+#    unit: million ha
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for maize and rice irrigated crop technologies
+#  - iamc_variable: "Land Cover|Cropland|Cereals|Irrigated"
+#    capacity: ["^LNDMAIIRR$", "^LNDRICIRR$"]
+#    unit: million ha
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for total land resource technology
+#  - iamc_variable: "Land Cover"
+#    capacity:
+#      - '^LNDOTH$'
+#      - '^LNDWAT$'
+#      - '^LNDFOR$'
+#      - '^LNDBLT$'
+#      - '^LNDBRLHR$'
+#      - '^LNDBRLLR$'
+#      - '^LNDBRLHI$'
+#      - '^LNDBRLLI$'
+#      - '^LNDWHEHR$'
+#      - '^LNDWHELR$'
+#      - '^LNDWHEHI$'
+#      - '^LNDWHELI$'
+#      - '^LNDMAIHR$'
+#      - '^LNDMAILR$'
+#      - '^LNDMAIHI$'
+#      - '^LNDMAILI$'
+#      - '^LNDSORHR$'
+#      - '^LNDSORLR$'
+#      - '^LNDSORHI$'
+#      - '^LNDSORLI$'
+#      - '^LNDCERHR$'
+#      - '^LNDCERLR$'
+#      - '^LNDCERHI$'
+#      - '^LNDCERLI$'
+#      - '^LNDCOFHR$'
+#      - '^LNDCOFLR$'
+#      - '^LNDCOFHI$'
+#      - '^LNDCOFLI$'
+#      - '^LNDOTCHR$'
+#      - '^LNDOTCLR$'
+#      - '^LNDOTCHI$'
+#      - '^LNDOTCLI$'
+#    unit: million ha
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+
+  # Water Section
+  # Mapping total capacity for total water resource technology
+#  - iamc_variable: "Water Withdrawal"
+#    capacity: ["^RSCPRC$"]
+#    unit: km3/yr
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for public water demand technologies
+#  - iamc_variable: "Water Withdrawal|Municipal Water"
+#    capacity: ["^DEMPUBSURWAT$", "^DEMPUBGWTWAT$"]
+#    unit: km3/yr
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for agricultural water demand technologies
+#  - iamc_variable: "Water Withdrawal|Irrigation"
+#    capacity: ["^DEMAGRSURWAT$", "^DEMAGRGWTWAT$"]
+#    unit: km3/yr
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+
+  # Mapping total capacity for power water demand technology
+#  - iamc_variable: "Water Withdrawal|Electricity"
+#    capacity: ["^DEMPWRSURWAT$"]
+#    unit: km3/yr
+#    transform: abs
+#    osemosys_param: "TotalCapacityAnnual"
+# Energy sector mappings
+# Mapping coal production rates from mining technologies and fuels.
+  - iamc_variable: 'Primary Energy|Coal'
+    technology: ['MINCOA.*']
+    fuel: ['COA.*']
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping Elecricity from biomass from production technologies and fuels.
+  - iamc_variable: 'Secondary Energy|Electricity|Biomass'
+    technology: ['PWRBIO001.*']
+    fuel: ['ELC001.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping coal-based electricity production from power generation technologies.
+  - iamc_variable: 'Primary Energy|Coal|Electricity'
+    technology: ['PWRCOA.*']
+    fuel: ['ELC001.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping gas-based electricity production from power generation technologies.
+  - iamc_variable: 'Secondary Energy|Electricity|Gas'
+    technology: ['PWRGAS.*']
+    fuel: ['ELC001.*']
+    unit: GW
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping hydro-based electricity production from power generation technologies.
+  - iamc_variable: 'Secondary Energy|Electricity|Hydro'
+    technology: ['PWRHYD.*','PWRHYD001.*','PWRHYD002.*','PWRHYD004.*',]
+    fuel: ['ELC001.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping transmission electricity production from power technologies.
+  - iamc_variable: 'Final Energy|Electricity'
+    technology: ['PWRTRN+.*']
+    fuel: ['ELC002+.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping transmission electricity production from power technologies.
+  - iamc_variable: 'Final Energy|Residential and Commercial|Electricity'
+    technology: ['PWRBACKSTOP+.*']
+    fuel: ['ELC002+.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping wind-based electricity production from power technologies.
+  - iamc_variable: 'Secondary Energy|Electricity|Wind'
+    technology: ['PWRWND.*']
+    fuel: ['ELC001.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping transmission electricity production from PV Utility power plant power technologies.
+  - iamc_variable: 'Secondary Energy|Electricity|Solar|PV'
+    technology: ['PWRSOL+.*','PWRPVR+.*']
+    fuel: ['ELC002+.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping transmission electricity production from Off-grid roof top PV and storage power technologies.
+  - iamc_variable: 'Secondary Energy|Electricity|Solar|PV|Residential'
+    technology: ['PWRPVU+.*']
+    fuel: ['ELC002+.*']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping  agriculture diesel Pproduction for agricultural diesel
+  - iamc_variable: 'Secondary Energy|Liquids|Oil'
+    technology: ['^DEMAGRDSL$']
+    fuel: ['^AGRDSL$']
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping  electricity  Production from diesel
+  - iamc_variable: 'Secondary Energy|Electricity|Fossil'
+    technology: ['^PWRDSL$']
+    fuel: ['^ELC001$']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping Biofuel production for biofuel transport to transport water withdrawal.
+  - iamc_variable: 'Secondary Energy|Liquids'
+    technology: ['^DEMTRABIO$']
+    fuel: ['^TRABIO$']
+    unit: EJ/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping geothermal energy for electricity production.
+  - iamc_variable: 'Secondary Energy|Liquids'
+    technology: ['^PWRGEO$']
+    fuel: ['^ELC001$']
+    unit: GW
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Water
+# Mapping precipitation production from resource precipation.
+# NEw variable not in common excel file
+  - iamc_variable: 'Water Flow|precipitation'
+    technology: ['^RSCPRC$']
+    fuel: ['^WTRPRC$']
+    unit: km3/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping Evapotranspiration  production from irrigated and built up land .
+# NEw variable not in common excel file
+  - iamc_variable: 'Water Flow|Built-Up Area|precipitation'
+    technology: ['^LNDBLT$']
+    fuel: ['^WTREVT$']
+    unit: mm/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping groundwater and surface water production for irrigated maize to agricultural water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Irrigation'
+#  technology: ['^LNDMAIIRR$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping water withdrawal for agriculture from rainfed maize land use.
+#- iamc_variable: 'Water|Withdrawal|Agriculture'
+#  technology: ['^LNDMAIRNF$']
+# fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Maps groundwater and surface water production for rainfed maize to agricultural water withdrawal.
+
+# Mapping  groundwater and surface water production for irrigated rice to agricultural water withdrawal.
+  - iamc_variable: 'Water|Withdrawal|Agriculture'
+    technology: ['^LNDRICIRR$','^LNDRICRNF$']
+    fuel: ['^WTRGWT$', '^WTRRUN$']
+    unit: km3/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping groundwater and surface water production for rainfed rice to agricultural water withdrawal.
+#- iamc_variable: 'Water|Withdrawal|Agriculture'
+#  technology: ['^LNDRICRNF$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+# transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping groundwater and surface water production for built land to other water withdrawal, .
+#- iamc_variable: 'Water|Withdrawal|Other'
+#  technology: ['^LNDBLT$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping groundwater and surface water production for forest land to other water withdrawal.  
+  - iamc_variable: 'Water|Withdrawal|Other'
+    technology: ['^LNDFOR$']
+    fuel: ['^WTRGWT$', '^WTRRUN$']
+    unit: km3/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+  
+
+# Mapping water withdrawal for water land use.
+#- iamc_variable: 'Water|Withdrawal|Other'
+#  technology: ['^LNDWAT$']
+#  fuel: ['^WTRGWT$', '^WTRRUN$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+#Maps groundwater and surface water production for water land to other water withdrawal, as land use is not standard.
+
+
+# Mapping  groundwater production for agricultural irrigation to agricultural water withdrawal..
+#- iamc_variable: 'Water Withdrawal|Irrigation'
+#  technology: ['^DEMAGRGWTWAT$','^DEMAGRSURWAT$']
+#  fuel: ['^AGRWAT$']
+#  unit: km3/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping  surface water production for agricultural irrigation to agricultural water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Irrigation'
+#  technology: ['^DEMAGRSURWAT$']
+#  fuel: ['^AGRWAT$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+ 
+
+# Mapping groundwater and Surface water production for public use to domestic water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Municipal Water'
+#  technology: ['^DEMPUBGWTWAT$','^DEMPUBSURWAT$']
+#  fuel: ['^PUBWAT$']
+#  unit: km3/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping surface water production for public surface use.
+#- iamc_variable: 'Water|Withdrawal|Domestic'
+#  technology: ['^DEMPUBSURWAT$']
+#  fuel: ['^PUBWAT$']
+#  unit: km³/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+  
+# Mapping surface water production for power generation to energy water withdrawal.
+#- iamc_variable: 'Water Withdrawal|Electricity'
+#  technology: ['^DEMPWRSURWAT$']
+#  fuel: ['^PWRWAT$']
+#  unit: km3/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Land sector mappings
+# Mapping production of Total land area.
+#- iamc_variable: 'Land Cover'
+#  technology: ['^RSCLND$']
+#  fuel: ['^LND$']
+#  unit: million ha
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping production of built land area.
+#- iamc_variable: 'Land Cover|Built-up Area'
+#  technology: ['^LNDBLT$']
+#  fuel: ['^LBLT$']
+#  unit: million ha
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+  
+#New Vairiable Name
+# Mapping production of forest land area.
+  - iamc_variable: 'Water Flow | Evapotranspiration'
+    technology:
+        - '^LNDOTH$'
+        - '^LNDWAT$'
+        - '^LNDFOR$'
+        - '^LNDBLT$'
+        - '^LNDBRLHR$'
+        - '^LNDBRLLR$'
+        - '^LNDBRLHI$'
+        - '^LNDBRLLI$'
+        - '^LNDWHEHR$'
+        - '^LNDWHELR$'
+        - '^LNDWHEHI$'
+        - '^LNDWHELI$'
+        - '^LNDMAIHR$'
+        - '^LNDMAILR$'
+        - '^LNDMAIHI$'
+        - '^LNDMAILI$'
+        - '^LNDSORHR$'
+        - '^LNDSORLR$'
+        - '^LNDSORHI$'
+        - '^LNDSORLI$'
+        - '^LNDCERHR$'
+        - '^LNDCERLR$'
+        - '^LNDCERHI$'
+        - '^LNDCERLI$'
+        - '^LNDCOFHR$'
+        - '^LNDCOFLR$'
+        - '^LNDCOFHI$'
+        - '^LNDCOFLI$'
+        - '^LNDOTCHR$'
+        - '^LNDOTCLR$'
+        - '^LNDOTCHI$'
+        - '^LNDOTCLI$'
+    fuel: ['^WTREVT$']
+    unit: Kton/1000 sq KM
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of irrigated and rainfed CROPS WITH LOW TO HIGH.
+  - iamc_variable: 'Agricultural Production|Crops'
+    technology:   ['^LNDMAIIRR$','^LNDMAIRNF$','^LNDBRLHR$','^LNDBRLLR$','^LNDBRLHI$','^LNDBRLLI$','^LNDMAIHR$','^LNDMAILR$','^LNDMAIHI$','^LNDMAILI$','^LNDWHEHR$','^LNDWHELR$','^LNDWHEHI$','^LNDWHELI$','^LNDSORHR$','^LNDSORLR$','^LNDSORHI$','^LNDSORLI$','^LNDOTCHR$','^LNDOTCLR$','^LNDOTCHI$','^LNDOTCLI$','^LNDCOFHR$','^LNDCOFLR$','^LNDCOFHI$','^LNDCOFLI$', '^LNDCERHR$','^LNDCERLR$','^LNDCERHI$','^LNDCERLI$']
+    fuel: ['^CRPMAI$','^CRPBRL$','^CRPWHE$','^CRPSOR$','^CRPOTC$','^CRPCOF$','^CRPCER$']
+    unit: million t DM/yr
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of rainfed maize land area.
+#- iamc_variable: 'Land Cover|Crop|Maize|Rainfed'
+#  technology: ['^LNDMAIRNF$']
+#  fuel: ['^CRPMAI$']
+#  unit: Mha/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of irrigated and rainfed rice land area.
+  - iamc_variable: 'Agricultural Production|Crops|Cereals'
+    technology: ['^LNDRICIRR$','^LNDRICRNF$']
+    fuel: ['^CRPRIC$']
+    unit:  Mton
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+# Mapping import of crops.
+  - iamc_variable: 'Trade|Agriculture|Crops'
+    technology: ['^IMPBRL$','^IMPCER$','^IMPMAI$','^IMPSOR$','^IMPWHE$',]
+    fuel: ['^CRPBRL$','^CRPCER$','^CRPMAI$','^CRPSOR$','^CRPWHE$',]
+    unit:  Mton
+    transform: abs
+    osemosys_param: 'ProductionByTechnologyByMode'
+  
+
+# Mapping production of rainfed rice land area.
+#- iamc_variable: 'Land Cover|Crop|Rice|Rainfed'
+#  technology: ['^LNDRICRNF$']
+#  fuel: ['^CRPRIC$']
+#  unit: Mha/yr
+#  transform: abs
+#  osemosys_param: 'ProductionByTechnologyByMode'
+
+# Mapping production of water land area.
+#  - iamc_variable: 'Water Ecosystems'
+#    technology: ['^LNDWAT$']
+#    fuel: ['^LWAT$']
+#    unit: million ha
+#    transform: abs
+#    osemosys_param: 'ProductionByTechnologyByMode'
+
+
+
+#Yield
+  - iamc_variable: 'Yield|Cropland|Cereals'
+    osemosys_param: 'Yield'
+    capacity: ['^CER$', '^WHE$', '^MAI$', '^BRL$', '^OTC$', '^COF$', '^SOR$']
+    unit: 'Mton/1000km sq'
+    
+  # Mapping yield for cropland with energy crops across different years.
+  # - iamc_variable: 'Yield|Cropland|Energy Crops'
+  #   osemosys_param: 'Crop_Yield'
+ #    technology: ['^SOR$']
+ #    fuel: ['.*']
+  #   unit: 't DM/ha/yr'
+  #   transform: abs
+  # Mapping yield for cropland with oil crops across different years.
+ #  - iamc_variable: 'Yield|Cropland|Oil Crops'
+  # #   osemosys_param: 'Crop_Yield'
+  #   technology: ['^COF$']
+  #   fuel: ['.*']
+  #   unit: 't DM/ha/yr'
+ #    transform: abs
+  # Mapping yield for cropland with other crops across different years.
+  # - iamc_variable: 'Yield|Cropland|Other Crops'
+  #   osemosys_param: 'Crop_Yield'
+  #   technology: ['^OTC$']
+ #    fuel: ['.*']
+ #    unit: 't DM/ha/yr'
+  #   transform: abs
+  # Mapping yield for cropland with sugar crops across different years.
+ # - iamc_variable: 'Yield|Cropland|Sugar Crops'
+ #   osemosys_param: 'Crop_Yield'
+ #   technology: ['^BRL$']
+ #   fuel: ['.*']
+ #   unit: 't DM/ha/yr'
+ #   transform: abs
+  # Mapping yield for cropland with maize across different years.
+#  - iamc_variable: 'Yield|Cropland|Cereals'
+#    osemosys_param: 'Crop_Yield'
+#    technology: ['^MAI$']
+#    fuel: ['.*']
+#    unit: 't DM/ha/yr'
+#    transform: abs
+  # Mapping yield for cropland with wheat across different years.
+#  - iamc_variable: 'Yield|Cropland|Cereals'
+ #   osemosys_param: 'Crop_Yield'
+#    technology: ['^WHE$']
+#    fuel: ['.*']
+#    unit: 't DM/ha/yr'
+ #   transform: abs
