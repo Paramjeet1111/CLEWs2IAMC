@@ -2,12 +2,11 @@ model: CLEWs-Ethiopia
 scenario: NDC_BAU
 region: "Ethiopia"
 results:
-- iamc_variable: 'Yield|Cropland|Cereals'
-  osemosys_param: 'Crop_Yield'
-  technology: ['^CER$', '^WHE$', '^MAI$', '^BRL$', '^OTC$', '^COF$', '^SOR$']
-  fuel: ['.*']
-  unit: 't DM/ha/yr'
-  transform: abs
+  - iamc_variable: 'Yield|Cropland|Cereals'
+    osemosys_param: 'Yield'
+    capacity: ['^CER$', '^WHE$', '^MAI$', '^BRL$', '^OTC$', '^COF$', '^SOR$']
+    unit: 'Mton/1000km sq'
+    
   # Mapping yield for cropland with energy crops across different years.
   # - iamc_variable: 'Yield|Cropland|Energy Crops'
   #   osemosys_param: 'Crop_Yield'

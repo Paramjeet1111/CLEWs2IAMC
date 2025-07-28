@@ -1,0 +1,8 @@
+model: CLEWs-Ethiopia
+scenario: NDC_BAU
+region: "Ethiopia"
+results:
+  - iamc_variable: 'Terrestrial Biodiversity|Biodiversity Intactness Index'
+    osemosys_param: 'BHI'
+    capacity: ['^BHI$']
+    unit: '%'
