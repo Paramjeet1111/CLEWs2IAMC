@@ -33,12 +33,9 @@ The project requires the following Python packages:
 - `subprocess` - For running command-line operations
 
 ## Installation
+1. Install Anaconda: https://www.anaconda.com/products/distribution
 
-1. Clone this repository
-2. Install required packages:
-```bash
-pip install osemosys2iamc pandas pyyaml
-```
+2. Clone this repository
 
 ## Usage
 
